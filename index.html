@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Altura inmobiliaria - Compra y Alquiler de Casas en República Dominicana</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='600' viewBox='0 0 1200 600'%3E%3Crect width='1200' height='600' fill='%23256D85'/%3E%3Cpath d='M0,400 Q300,350 600,450 T1200,400 V600 H0 Z' fill='%2347B5FF'/%3E%3Cpath d='M0,450 Q300,500 600,450 T1200,500 V600 H0 Z' fill='%23DFF6FF'/%3E%3Cpath d='M300,600 L400,450 L500,600 Z' fill='%23FFFFFF'/%3E%3Cpath d='M700,600 L800,400 L900,600 Z' fill='%23FFFFFF'/%3E%3Cpath d='M1000,600 L1050,500 L1100,600 Z' fill='%23FFFFFF'/%3E%3Cpath d='M100,600 L150,550 L200,600 Z' fill='%23FFFFFF'/%3E%3Crect x='600' y='430' width='150' height='170' fill='%23FFFFFF'/%3E%3Crect x='630' y='470' width='40' height='60' fill='%23256D85'/%3E%3Crect x='680' y='470' width='40' height='40' fill='%23256D85'/%3E%3Cpath d='M600,430 L675,380 L750,430 Z' fill='%23FF9E9E'/%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .team-card:hover img {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card {
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #06b6d4;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px);
+        }
+        
+        .property-card {
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .property-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .property-card:hover .property-image {
+            transform: scale(1.05);
+        }
+        
+        .property-image {
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-tab {
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-tab.active {
+            background-color: #0891b2;
+            color: white;
+        }
+        
+        .gallery-tab:hover:not(.active) {
+            background-color: #e0f2fe;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md fixed w-full z-10">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="text-cyan-600 font-bold text-2xl">Altura<span class="text-cyan-800">Inmobiliaria</span></div>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#inicio" class="nav-link text-gray-700 hover:text-cyan-600 font-medium">Inicio</a>
+                <a href="#quienes-somos" class="nav-link text-gray-700 hover:text-cyan-600 font-medium">Quiénes Somos</a>
+                <a href="#servicios" class="nav-link text-gray-700 hover:text-cyan-600 font-medium">Servicios</a>
+                <a href="#propiedades" class="nav-link text-gray-700 hover:text-cyan-600 font-medium">Propiedades</a>
+                <a href="#equipo" class="nav-link text-gray-700 hover:text-cyan-600 font-medium">Nuestro Equipo</a>
+                <a href="#testimonios" class="nav-link text-gray-700 hover:text-cyan-600 font-medium">Testimonios</a>
+                <a href="#contacto" class="nav-link text-gray-700 hover:text-cyan-600 font-medium">Contacto</a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-toggle" class="focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#inicio" class="text-gray-700 hover:text-cyan-600 font-medium py-2">Inicio</a>
+                <a href="#quienes-somos" class="text-gray-700 hover:text-cyan-600 font-medium py-2">Quiénes Somos</a>
+                <a href="#servicios" class="text-gray-700 hover:text-cyan-600 font-medium py-2">Servicios</a>
+                <a href="#propiedades" class="text-gray-700 hover:text-cyan-600 font-medium py-2">Propiedades</a>
+                <a href="#equipo" class="text-gray-700 hover:text-cyan-600 font-medium py-2">Nuestro Equipo</a>
+                <a href="#testimonios" class="text-gray-700 hover:text-cyan-600 font-medium py-2">Testimonios</a>
+                <a href="#contacto" class="text-gray-700 hover:text-cyan-600 font-medium py-2">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-section h-screen flex items-center justify-center text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Tu Hogar Ideal en República Dominicana</h1>
+            <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto">Especialistas en compra, venta y alquiler de propiedades exclusivas en las mejores zonas del país</p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <a href="#propiedades" class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 ease-in-out transform hover:scale-105">
+                    Ver Propiedades
+                </a>
+                <a href="#contacto" class="bg-white hover:bg-gray-100 text-cyan-800 font-bold py-3 px-8 rounded-full transition duration-300 ease-in-out transform hover:scale-105">
+                    Contáctanos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quienes Somos Section -->
+    <section id="quienes-somos" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Quiénes Somos</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Somos una empresa inmobiliaria líder en República Dominicana, dedicada a ofrecer soluciones integrales para la compra, venta y alquiler de propiedades en todo el país.</p>
+                <div class="w-24 h-1 bg-cyan-600 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Misión -->
+                <div class="bg-gradient-to-br from-cyan-50 to-cyan-100 p-8 rounded-xl shadow-lg">
+                    <div class="bg-cyan-600 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">Misión</h3>
+                    <p class="text-gray-600 text-center">Ofrecer Servicios Inmobiliarios de Excelencia por medio de un equipo de colaboradores en la cual la calidad de atención al cliente, la experiencia en el área y la capacitación sean factores esenciales para brindar un grado de Calidad Total en nuestros servicios.</p>
+                </div>
+                
+                <!-- Visión -->
+                <div class="bg-gradient-to-br from-cyan-50 to-cyan-100 p-8 rounded-xl shadow-lg">
+                    <div class="bg-cyan-600 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v-2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">Visión</h3>
+                    <p class="text-gray-600 text-center">Ubicar a Altura inmobiliaria como una empresa líder en el mercado de bienes raíces, la cual sea reconocida por la capacidad de desarrollo de proyectos de inversión, comercialización, buscando constantemente oportunidades de negocio con las cuales tanto asesor – cliente – empresa, mejoren la calidad de vida y contribuyan en el desarrollo profesional y los valores.</p>
+                </div>
+                
+                <!-- Valores -->
+                <div class="bg-gradient-to-br from-cyan-50 to-cyan-100 p-8 rounded-xl shadow-lg">
+                    <div class="bg-cyan-600 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">Valores</h3>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-cyan-600 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Trabajo en equipo</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-cyan-600 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Responsabilidad</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-cyan-600 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Lealtad</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-cyan-600 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Profesionalismo</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-cyan-600 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Confianza</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-cyan-600 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Transparencia</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-cyan-600 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Respeto</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-cyan-600 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Innovación</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios Section -->
+    <section id="servicios" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Nuestros Servicios</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Ofrecemos soluciones integrales para todas tus necesidades inmobiliarias en República Dominicana.</p>
+                <div class="w-24 h-1 bg-cyan-600 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-white rounded-xl shadow-lg p-6 border-t-4 border-cyan-600">
+                    <div class="bg-cyan-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Compra de Propiedades</h3>
+                    <p class="text-gray-600 mb-4">Te ayudamos a encontrar la propiedad de tus sueños en las mejores zonas de República Dominicana, con asesoramiento personalizado durante todo el proceso.</p>
+                    <ul class="text-gray-600 space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-cyan-600 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Búsqueda personalizada</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-cyan-600 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Asesoría legal completa</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-cyan-600 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Negociación favorable</span>
+                        </li>
+                    </ul>
+                    <a href="#contacto" class="inline-block bg-cyan-600 hover:bg-cyan-700 text-white font-medium py-2 px-6 rounded-lg transition duration-300">Más información</a>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card bg-white rounded-xl shadow-lg p-6 border-t-4 border-cyan-600">
+                    <div class="bg-cyan-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Alquiler de Propiedades</h3>
+                    <p class="text-gray-600 mb-4">Disponemos de un amplio catálogo de propiedades en alquiler, desde apartamentos vacacionales hasta residencias de lujo para largas temporadas.</p>
+                    <ul class="text-gray-600 space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-cyan-600 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Alquileres vacacionales</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-cyan-600 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Alquileres a largo plazo</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-cyan-600 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Gestión de propiedades</span>
+                        </li>
+                    </ul>
+                    <a href="#contacto" class="inline-block bg-cyan-600 hover:bg-cyan-700 text-white font-medium py-2 px-6 rounded-lg transition duration-300">Más información</a>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card bg-white rounded-xl shadow-lg p-6 border-t-4 border-cyan-600">
+                    <div class="bg-cyan-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Venta de Propiedades</h3>
+                    <p class="text-gray-600 mb-4">Maximizamos el valor de tu propiedad con estrategias de marketing efectivas y una amplia red de compradores potenciales.</p>
+                    <ul class="text-gray-600 space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-cyan-600 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Valoración profesional</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-cyan-600 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Marketing inmobiliario</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-cyan-600 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Gestión de documentación</span>
+                        </li>
+                    </ul>
+                    <a href="#contacto" class="inline-block bg-cyan-600 hover:bg-cyan-700 text-white font-medium py-2 px-6 rounded-lg transition duration-300">Más información</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Propiedades Destacadas Section -->
+    <section id="propiedades" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Propiedades Destacadas</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Descubre nuestra selección de propiedades exclusivas en las mejores ubicaciones de República Dominicana.</p>
+                <div class="w-24 h-1 bg-cyan-600 mx-auto mt-4"></div>
+            </div>
+            
+            <!-- Gallery Tabs -->
+            <div class="flex flex-wrap justify-center mb-10">
+                <button class="gallery-tab active px-6 py-2 rounded-full m-2 font-medium" data-category="all">Todas</button>
+                <button class="gallery-tab px-6 py-2 rounded-full m-2 font-medium" data-category="venta">En Venta</button>
+                <button class="gallery-tab px-6 py-2 rounded-full m-2 font-medium" data-category="alquiler">En Alquiler</button>
+                <button class="gallery-tab px-6 py-2 rounded-full m-2 font-medium" data-category="lujo">Propiedades de Lujo</button>
+            </div>
+            
+            <!-- Property Gallery -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Property 1 -->
+                <div class="property-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="venta lujo">
+                    <div class="relative h-64 overflow-hidden flex items-center justify-center bg-gray-100">
+                        <img src="img/Villa Punta Cana.jpg" alt="Villa de Lujo en Punta Cana" class="w-full h-full object-cover object-center">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-cyan-600 text-white px-3 py-1 rounded-full text-sm font-medium">En Venta</span>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-amber-500 text-white px-3 py-1 rounded-full text-sm font-medium">Destacado</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Villa de Lujo en Punta Cana</h3>
+                        <p class="text-gray-500 mb-4"><i class="fas fa-map-marker-alt text-cyan-600 mr-2"></i>Punta Cana, La Altagracia</p>
+                        <div class="flex flex-wrap mb-4">
+                            <div class="w-1/3 flex items-center">
+                                <i class="fas fa-bed text-cyan-600 mr-2"></i>
+                                <span>5 hab.</span>
+                            </div>
+                            <div class="w-1/3 flex items-center">
+                                <i class="fas fa-bath text-cyan-600 mr-2"></i>
+                                <span>4 baños</span>
+                            </div>
+                            <div class="w-1/3 flex items-center">
+                                <i class="fas fa-ruler-combined text-cyan-600 mr-2"></i>
+                                <span>450 m²</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <p class="text-xl font-bold text-cyan-600">US$ 850,000</p>
+                            <a href="javascript:void(0)" class="bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-lg transition duration-300">Ver detalles</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Property 2 -->
+                <div class="property-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="alquiler">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="img/¡Elegancia Natural en Jarabacoa! Villa de Lujo con Piscina Infinity.jpg" alt="Apartamento Moderno en Santo Domingo" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-emerald-600 text-white px-3 py-1 rounded-full text-sm font-medium">En Alquiler</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">¡Elegancia Natural en Jarabacoa! Villa de Lujo con Piscina Infinity</h3>
+                        <p class="text-gray-500 mb-4"><i class="fas fa-map-marker-alt text-cyan-600 mr-2"></i>Naco, Santo Domingo</p>
+                        <div class="flex flex-wrap mb-4">
+                            <div class="w-1/3 flex items-center">
+                                <i class="fas fa-bed text-cyan-600 mr-2"></i>
+                                <span>3 hab.</span>
+                            </div>
+                            <div class="w-1/3 flex items-center">
+                                <i class="fas fa-bath text-cyan-600 mr-2"></i>
+                                <span>2 baños</span>
+                            </div>
+                            <div class="w-1/3 flex items-center">
+                                <i class="fas fa-ruler-combined text-cyan-600 mr-2"></i>
+                                <span>120 m²</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <p class="text-xl font-bold text-cyan-600">US$ 1,200/mes</p>
+                            <a href="javascript:void(0)" class="bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-lg transition duration-300">Ver detalles</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Property 3: Sustituye el SVG por una imagen real -->
+                <div class="property-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="venta">
+                    <div class="relative h-64 overflow-hidden flex items-center justify-center bg-gray-100">
+                        <img src="img/Casa Jarabacoa.jpg" alt="Casa Familiar en Jarabacoa" class="w-full h-full object-cover object-center">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-cyan-600 text-white px-3 py-1 rounded-full text-sm font-medium">En Venta</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">APARTAMENTO VISTA AL MAR EN TORRE NUEVA DE 2 HABITACIONES! En la Esperilla, Piso 13</h3>
+                        <p class="text-gray-500 mb-4"><i class="fas fa-map-marker-alt text-cyan-600 mr-2"></i>Jarabacoa, La Vega</p>
+                        <div class="flex flex-wrap mb-4">
+                            <div class="w-1/3 flex items-center">
+                                <i class="fas fa-bed text-cyan-600 mr-2"></i>
+                                <span>4 hab.</span>
+                            </div>
+                            <div class="w-1/3 flex items-center">
+                                <i class="fas fa-bath text-cyan-600 mr-2"></i>
+                                <span>3 baños</span>
+                            </div>
+                            <div class="w-1/3 flex items-center">
+                                <i class="fas fa-ruler-combined text-cyan-600 mr-2"></i>
+                                <span>280 m²</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <p class="text-xl font-bold text-cyan-600">US$ 320,000</p>
+                            <a href="javascript:void(0)" class="bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-lg transition duration-300">Ver detalles</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Property 4: Villa de Lujo en Jarabacoa -->
+                <div class="property-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="venta lujo">
+                    <div class="relative h-64 overflow-hidden flex items-center justify-center bg-gray-100">
+                        <img src="img/¡Elegancia Natural en Jarabacoa! Villa de Lujo con Piscina Infinity.jpg" alt="Villa de Lujo en Jarabacoa" class="w-full h-full object-cover object-center">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-cyan-600 text-white px-3 py-1 rounded-full text-sm font-medium">En Venta</span>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-amber-500 text-white px-3 py-1 rounded-full text-sm font-medium">Destacado</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Villa de Lujo en Jarabacoa</h3>
+                        <p class="text-gray-500 mb-4"><i class="fas fa-map-marker-alt text-cyan-600 mr-2"></i>Jarabacoa, La Vega</p>
+                        <div class="flex flex-wrap mb-4">
+                            <div class="w-1/3 flex items-center">
+                                <i class="fas fa-bed text-cyan-600 mr-2"></i>
+                                <span>6 hab.</span>
+                            </div>
+                            <div class="w-1/3 flex items-center">
+                                <i class="fas fa-bath text-cyan-600 mr-2"></i>
+                                <span>6 baños</span>
+                            </div>
+                            <div class="w-1/3 flex items-center">
+                                <i class="fas fa-ruler-combined text-cyan-600 mr-2"></i>
+                                <span>700 m²</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <p class="text-xl font-bold text-cyan-600">US$ 1,500,000</p>
+                            <a href="javascript:void(0)" class="bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-lg transition duration-300">Ver detalles</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Property 5: Apartamento Moderno en Santo Domingo (2) -->
+                <div class="property-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="alquiler">
+                    <div class="relative h-64 overflow-hidden flex items-center justify-center bg-gray-100">
+                        <img src="img/Apartamento Moderno en Santo Domingo (2).jpg" alt="Apartamento Moderno en Santo Domingo" class="w-full h-full object-cover object-center">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-emerald-600 text-white px-3 py-1 rounded-full text-sm font-medium">En Alquiler</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Apartamento Moderno en Santo Domingo (Piantini)</h3>
+                        <p class="text-gray-500 mb-4"><i class="fas fa-map-marker-alt text-cyan-600 mr-2"></i>Piantini, Santo Domingo</p>
+                        <div class="flex flex-wrap mb-4">
+                            <div class="w-1/3 flex items-center">
+                                <i class="fas fa-bed text-cyan-600 mr-2"></i>
+                                <span>2 hab.</span>
+                            </div>
+                            <div class="w-1/3 flex items-center">
+                                <i class="fas fa-bath text-cyan-600 mr-2"></i>
+                                <span>2 baños</span>
+                            </div>
+                            <div class="w-1/3 flex items-center">
+                                <i class="fas fa-ruler-combined text-cyan-600 mr-2"></i>
+                                <span>100 m²</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <p class="text-xl font-bold text-cyan-600">US$ 950/mes</p>
+                            <a href="javascript:void(0)" class="bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-lg transition duration-300">Ver detalles</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Property 6: Apartamentos en Prado Oriental, San Isidro -->
+                <div class="property-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="venta">
+                    <div class="relative h-64 overflow-hidden flex items-center justify-center bg-gray-100">
+                        <img src="img/Apartamentos en Prado Oriental, San Isidro.jpg" alt="Apartamentos en Prado Oriental, San Isidro" class="w-full h-full object-cover object-center">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-cyan-600 text-white px-3 py-1 rounded-full text-sm font-medium">En Venta</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Apartamentos en Prado Oriental</h3>
+                        <p class="text-gray-500 mb-4"><i class="fas fa-map-marker-alt text-cyan-600 mr-2"></i>San Isidro, Santo Domingo Este</p>
+                        <div class="flex flex-wrap mb-4">
+                            <div class="w-1/3 flex items-center">
+                                <i class="fas fa-bed text-cyan-600 mr-2"></i>
+                                <span>3 hab.</span>
+                            </div>
+                            <div class="w-1/3 flex items-center">
+                                <i class="fas fa-bath text-cyan-600 mr-2"></i>
+                                <span>2 baños</span>
+                            </div>
+                            <div class="w-1/3 flex items-center">
+                                <i class="fas fa-ruler-combined text-cyan-600 mr-2"></i>
+                                <span>110 m²</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <p class="text-xl font-bold text-cyan-600">US$ 120,000</p>
+                            <a href="javascript:void(0)" class="bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-lg transition duration-300">Ver detalles</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Property 7: ESPECTACULAR VILLA DE 3 NIVELES EN JARABACOA -->
+                <div class="property-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="venta lujo">
+                    <div class="relative h-64 overflow-hidden flex items-center justify-center bg-gray-100">
+                        <img src="img/ESPECTACULAR VILLA DE 3 NIVELES EN JARABACOA.jpg" alt="Villa de 3 Niveles en Jarabacoa" class="w-full h-full object-cover object-center">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-cyan-600 text-white px-3 py-1 rounded-full text-sm font-medium">En Venta</span>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-amber-500 text-white px-3 py-1 rounded-full text-sm font-medium">Destacado</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Villa de 3 Niveles en Jarabacoa</h3>
+                        <p class="text-gray-500 mb-4"><i class="fas fa-map-marker-alt text-cyan-600 mr-2"></i>Jarabacoa, La Vega</p>
+                        <div class="flex flex-wrap mb-4">
+                            <div class="w-1/3 flex items-center">
+                                <i class="fas fa-bed text-cyan-600 mr-2"></i>
+                                <span>5 hab.</span>
+                            </div>
+                            <div class="w-1/3 flex items-center">
+                                <i class="fas fa-bath text-cyan-600 mr-2"></i>
+                                <span>5 baños</span>
+                            </div>
+                            <div class="w-1/3 flex items-center">
+                                <i class="fas fa-ruler-combined text-cyan-600 mr-2"></i>
+                                <span>600 m²</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <p class="text-xl font-bold text-cyan-600">US$ 1,100,000</p>
+                            <a href="javascript:void(0)" class="bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-lg transition duration-300">Ver detalles</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <a href="#contacto" class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 ease-in-out transform hover:scale-105">
+                    Ver todas las propiedades
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nuestro Equipo Section -->
+    <section id="equipo" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Nuestro Equipo</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Contamos con profesionales altamente calificados y comprometidos con brindar el mejor servicio en el mercado inmobiliario dominicano.</p>
+                <div class="w-24 h-1 bg-cyan-600 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Team Member 1: Carolina Prudenza -->
+                <div class="team-card bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="h-48 w-48 mx-auto overflow-hidden flex items-center justify-center mt-8">
+                        <img src="img/Carolina Prudenza.jpeg" alt="Carolina Prudenza" class="w-full h-full object-cover object-center rounded-full">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Carolina Prudenza</h3>
+                        <p class="text-cyan-600 font-medium mb-4">Gerente de Negocios</p>
+                        <p class="text-gray-600 mb-4">
+                            Encargada de la estrategia y operaciones generales de la agencia. Lidera el crecimiento del negocio, desarrolla el plan de negocio, gestiona la marca, supervisa las finanzas y la administración general. Además, establece alianzas estratégicas con empresas y profesionales para fortalecer la agencia.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-cyan-600 hover:text-cyan-800">
+                                <i class="fab fa-linkedin text-lg"></i>
+                            </a>
+                            <a href="#" class="text-cyan-600 hover:text-cyan-800">
+                                <i class="fab fa-twitter text-lg"></i>
+                            </a>
+                            <a href="#" class="text-cyan-600 hover:text-cyan-800">
+                                <i class="fas fa-envelope text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Team Member 2: Yasmín Morel -->
+                <div class="team-card bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="h-48 w-48 mx-auto overflow-hidden flex items-center justify-center mt-8">
+                        <img src="img/Yasmín Morel.jpeg" alt="Yasmín Morel" class="w-full h-full object-cover object-center rounded-full">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Yasmín Morel</h3>
+                        <p class="text-cyan-600 font-medium mb-4">Directora de Ventas y Relaciones con Clientes</p>
+                        <p class="text-gray-600 mb-4">
+                            Responsable de la captación y promoción de propiedades, valoración de inmuebles y atención directa a los clientes. Gestiona el cierre de ventas y alquileres, y mantiene la base de datos de clientes, asegurando la mejor atención durante todo el proceso.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-cyan-600 hover:text-cyan-800">
+                                <i class="fab fa-linkedin text-lg"></i>
+                            </a>
+                            <a href="#" class="text-cyan-600 hover:text-cyan-800">
+                                <i class="fab fa-twitter text-lg"></i>
+                            </a>
+                            <a href="#" class="text-cyan-600 hover:text-cyan-800">
+                                <i class="fas fa-envelope text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Team Member 3: Clarisa Gómez -->
+                <div class="team-card bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="h-48 w-48 mx-auto overflow-hidden flex items-center justify-center mt-8">
+                        <img src="img/Clarisa Gómez.jpeg" alt="Clarisa Gómez" class="w-full h-full object-cover object-center rounded-full">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Clarisa Gómez</h3>
+                        <p class="text-cyan-600 font-medium mb-4">Gerente de Marketing y Contenido</p>
+                        <p class="text-gray-600 mb-4">
+                            Encargada de la presencia digital y promoción de la agencia y sus propiedades. Gestiona redes sociales, crea contenido visual atractivo, administra el sitio web y portales inmobiliarios, y diseña campañas de publicidad digital para atraer clientes y fortalecer la marca.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-cyan-600 hover:text-cyan-800">
+                                <i class="fab fa-linkedin text-lg"></i>
+                            </a>
+                            <a href="#" class="text-cyan-600 hover:text-cyan-800">
+                                <i class="fab fa-twitter text-lg"></i>
+                            </a>
+                            <a href="#" class="text-cyan-600 hover:text-cyan-800">
+                                <i class="fas fa-envelope text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios Section -->
+    <section id="testimonios" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Lo que Nuestros Clientes Opinan</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">La satisfacción de nuestros clientes es nuestro mayor orgullo. Conoce sus experiencias con AlturaInmobiliaria.</p>
+                <div class="w-24 h-1 bg-cyan-600 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card bg-white rounded-xl shadow-lg p-6 relative">
+                    <div class="absolute -top-5 left-6">
+                        <svg class="w-10 h-10 text-cyan-600 opacity-50" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                        </svg>
+                    </div>
+                    <div class="pt-6">
+                        <p class="text-gray-600 mb-6 italic">"Gracias a AlturaInmobiliaria encontramos nuestra casa de playa soñada en Punta Cana. El proceso fue rápido y sin complicaciones. Su equipo nos guió en cada paso y nos consiguieron un excelente precio."</p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-cyan-600 font-bold text-xl">JR</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Juan Rodríguez</h4>
+                                <div class="flex text-yellow-400 mt-1">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card bg-white rounded-xl shadow-lg p-6 relative">
+                    <div class="absolute -top-5 left-6">
+                        <svg class="w-10 h-10 text-cyan-600 opacity-50" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                        </svg>
+                    </div>
+                    <div class="pt-6">
+                        <p class="text-gray-600 mb-6 italic">"Como inversionista extranjero, valoré enormemente la asesoría legal que me brindó AlturaInmobiliaria. Su conocimiento del mercado dominicano y su profesionalismo hicieron que mi inversión fuera segura y rentable."</p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-cyan-600 font-bold text-xl">SM</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Sarah Miller</h4>
+                                <div class="flex text-yellow-400 mt-1">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card bg-white rounded-xl shadow-lg p-6 relative">
+                    <div class="absolute -top-5 left-6">
+                        <svg class="w-10 h-10 text-cyan-600 opacity-50" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                        </svg>
+                    </div>
+                    <div class="pt-6">
+                        <p class="text-gray-600 mb-6 italic">"Vendí mi apartamento en Santo Domingo con AlturaInmobiliaria y quedé impresionado con su estrategia de marketing. Consiguieron un comprador en menos de un mes y a un precio superior al que esperaba. ¡Totalmente recomendados!"</p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-cyan-600 font-bold text-xl">LM</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Luis Martínez</h4>
+                                <div class="flex text-yellow-400 mt-1">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="contacto" class="py-20 bg-cyan-700 text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Contáctanos</h2>
+                <p class="text-cyan-100 max-w-2xl mx-auto">Estamos aquí para ayudarte a encontrar tu propiedad ideal en República Dominicana. ¡Ponte en contacto con nosotros!</p>
+                <div class="w-24 h-1 bg-white mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="bg-white rounded-xl shadow-lg p-8 text-gray-800">
+                    <h3 class="text-2xl font-bold text-cyan-700 mb-6">Envíanos un mensaje</h3>
+                    <form id="contact-form" class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="name" class="block text-gray-700 font-medium mb-2">Nombre</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-600">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-700 font-medium mb-2">Correo electrónico</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-600">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-gray-700 font-medium mb-2">Teléfono</label>
+                            <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-600">
+                        </div>
+                        <div>
+                            <label for="service" class="block text-gray-700 font-medium mb-2">Servicio de interés</label>
+                            <select id="service" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-600">
+                                <option value="">Selecciona un servicio</option>
+                                <option value="compra">Compra de propiedad</option>
+                                <option value="venta">Venta de propiedad</option>
+                                <option value="alquiler">Alquiler de propiedad</option>
+                                <option value="inversion">Inversión inmobiliaria</option>
+                                <option value="asesoria">Asesoría legal</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Mensaje</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-600"></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300">Enviar mensaje</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div>
+                    <div class="bg-cyan-800 rounded-xl shadow-lg p-8 mb-8">
+                        <h3 class="text-2xl font-bold mb-6">Información de contacto</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="bg-cyan-600 w-10 h-10 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-cyan-300">Dirección</h4>
+                                    <p class="text-cyan-100">Av. Winston Churchill 1550, Santo Domingo, República Dominicana</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-cyan-600 w-10 h-10 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-cyan-300">Teléfono</h4>
+                                    <p class="text-cyan-100">+1 (809) 555-7890</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-cyan-600 w-10 h-10 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2  0 0 002.22 0L21 8M5  19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-cyan-300">Correo electrónico</h4>
+                                    <p class="text-cyan-100">info@AlturaInmobiliaria.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-cyan-600 w-10 h-10 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-cyan-300">Horario de atención</h4>
+                                    <p class="text-cyan-100">Lunes a Viernes: 9:00 AM - 6:00 PM<br>Sábados: 9:00 AM - 1:00 PM</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-cyan-800 rounded-xl shadow-lg p-8">
+                        <h3 class="text-2xl font-bold mb-6">Síguenos en redes sociales</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="social-icon bg-cyan-600 hover:bg-cyan-500 w-12 h-12 rounded-full flex items-center justify-center">
+                                <i class="fab fa-facebook-f text-xl"></i>
+                            </a>
+                            <a href="#" class="social-icon bg-cyan-600 hover:bg-cyan-500 w-12 h-12 rounded-full flex items-center justify-center">
+                                <i class="fab fa-instagram text-xl"></i>
+                            </a>
+                            <a href="#" class="social-icon bg-cyan-600 hover:bg-cyan-500 w-12 h-12 rounded-full flex items-center justify-center">
+                                <i class="fab fa-twitter text-xl"></i>
+                            </a>
+                            <a href="#" class="social-icon bg-cyan-600 hover:bg-cyan-500 w-12 h-12 rounded-full flex items-center justify-center">
+                                <i class="fab fa-linkedin-in text-xl"></i>
+                            </a>
+                            <a href="#" class="social-icon bg-cyan-600 hover:bg-cyan-500 w-12 h-12 rounded-full flex items-center justify-center">
+                                <i class="fab fa-youtube text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">AlturaInmobiliaria</h3>
+                    <p class="text-gray-400">Tu socio de confianza para encontrar el hogar perfecto en República Dominicana.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Enlaces rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#inicio" class="text-gray-400 hover:text-white transition duration-300">Inicio</a></li>
+                        <li><a href="#quienes-somos" class="text-gray-400 hover:text-white transition duration-300">Quiénes Somos</a></li>
+                        <li><a href="#servicios" class="text-gray-400 hover:text-white transition duration-300">Servicios</a></li>
+                        <li><a href="#propiedades" class="text-gray-400 hover:text-white transition duration-300">Propiedades</a></li>
+                        <li><a href="#equipo" class="text-gray-400 hover:text-white transition duration-300">Nuestro Equipo</a></li>
+                        <li><a href="#testimonios" class="text-gray-400 hover:text-white transition duration-300">Testimonios</a></li>
+                        <li><a href="#contacto" class="text-gray-400 hover:text-white transition duration-300">Contacto</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Servicios</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Compra de propiedades</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Venta de propiedades</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Alquiler de propiedades</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Inversiones inmobiliarias</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Asesoría legal</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Boletín informativo</h3>
+                    <p class="text-gray-400 mb-4">Suscríbete para recibir las últimas novedades y ofertas exclusivas.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Tu correo electrónico" class="px-4 py-2 w-full rounded-l-lg focus:outline-none text-gray-800">
+                        <button type="submit" class="bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded-r-lg transition duration-300">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400">&copy; 2025 AlturaInmobiliaria. Todos los derechos reservados.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">Política de privacidad</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">Términos y condiciones</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+   
+    <div id="property-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-lg p-8 max-w-md w-full relative">
+            <button id="close-modal" class="absolute top-4 right-4 text-gray-500 hover:text-cyan-600 text-2xl font-bold">&times;</button>
+            <h3 id="modal-title" class="text-2xl font-bold text-cyan-700 mb-4"></h3>
+            <img id="modal-image" src="" alt="" class="w-full h-48 object-cover rounded-lg mb-4">
+            <p id="modal-location" class="text-gray-500 mb-2"><i class="fas fa-map-marker-alt text-cyan-600 mr-2"></i></p>
+            <ul id="modal-details" class="mb-4 text-gray-700">
+               
+            </ul>
+            <p id="modal-price" class="text-xl font-bold text-cyan-600 mb-4"></p>
+            <p id="modal-description" class="text-gray-600"></p>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+        
+        
+        const contactForm = document.getElementById('contact-form');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const service = document.getElementById('service').value;
+            const message = document.getElementById('message').value;
+            
+            
+            if (!name || !email || !message) {
+                alert('Por favor completa los campos obligatorios: Nombre, Correo electrónico y Mensaje.');
+                return;
+            }
+            
+            
+            alert('¡Gracias por contactarnos! Te responderemos a la brevedad posible.');
+            
+            
+            contactForm.reset();
+        });
+        
+        
+        const galleryTabs = document.querySelectorAll('.gallery-tab');
+        const propertyCards = document.querySelectorAll('.property-card');
+        
+        galleryTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                
+                galleryTabs.forEach(t => t.classList.remove('active'));
+                
+                tab.classList.add('active');
+                
+                const category = tab.getAttribute('data-category');
+                
+               
+                propertyCards.forEach(card => {
+                    if (category === 'all') {
+                        card.style.display = 'block';
+                    } else {
+                        const cardCategories = card.getAttribute('data-category').split(' ');
+                        if (cardCategories.includes(category)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+        
+        const modal = document.getElementById('property-modal');
+        const closeModal = document.getElementById('close-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalImage = document.getElementById('modal-image');
+        const modalLocation = document.getElementById('modal-location');
+        const modalDetails = document.getElementById('modal-details');
+        const modalPrice = document.getElementById('modal-price');
+        const modalDescription = document.getElementById('modal-description');
+        
+        const propertyData = {
+            "Villa de Lujo en Punta Cana": {
+                image: "img/Villa Punta Cana.jpg",
+                location: "Punta Cana, La Altagracia",
+                details: ["5 habitaciones", "4 baños", "450 m²", "Piscina privada", "Jardín amplio"],
+                price: "US$ 850,000",
+                description: "Villa moderna con acabados de lujo, cerca de la playa y zonas exclusivas."
+            },
+            "¡Elegancia Natural en Jarabacoa! Villa de Lujo con Piscina Infinity": {
+                image: "img/¡Elegancia Natural en Jarabacoa! Villa de Lujo con Piscina Infinity.jpg",
+                location: "Naco, Santo Domingo",
+                details: ["3 habitaciones", "2 baños", "120 m²", "Balcón", "Seguridad 24h"],
+                price: "US$ 1,200/mes",
+                description: "Apartamento céntrico, ideal para familias o ejecutivos, cerca de centros comerciales."
+            },
+            "APARTAMENTO VISTA AL MAR EN TORRE NUEVA DE 2 HABITACIONES! En la Esperilla, Piso 13": {
+                image: "img/Casa Jarabacoa.jpg",
+                location: "La Esperilla, Santo Domingo",
+                details: ["4 habitaciones", "3 baños", "280 m²", "Vista al mar", "Gimnasio en el edificio"],
+                price: "US$ 320,000",
+                description: "Apartamento con espectacular vista al mar, en torre moderna y segura."
+            },
+            "Villa de Lujo en Jarabacoa": {
+                image: "img/¡Elegancia Natural en Jarabacoa! Villa de Lujo con Piscina Infinity.jpg",
+                location: "Jarabacoa, La Vega",
+                details: ["6 habitaciones", "6 baños", "700 m²", "Piscina infinity", "Vista a la montaña"],
+                price: "US$ 1,500,000",
+                description: "Villa exclusiva con piscina infinity y vistas espectaculares a la naturaleza."
+            },
+            "Apartamento Moderno en Santo Domingo": {
+                image: "img/Apartamento Moderno en Santo Domingo (2).jpg",
+                location: "Piantini, Santo Domingo",
+                details: ["2 habitaciones", "2 baños", "100 m²", "Moderno", "Parqueo privado"],
+                price: "US$ 950/mes",
+                description: "Apartamento moderno en zona exclusiva, cerca de restaurantes y centros comerciales."
+            },
+            "Apartamentos en Prado Oriental": {
+                image: "img/Apartamentos en Prado Oriental, San Isidro.jpg",
+                location: "San Isidro, Santo Domingo Este",
+                details: ["3 habitaciones", "2 baños", "110 m²", "Nuevo proyecto", "Áreas sociales"],
+                price: "US$ 120,000",
+                description: "Apartamentos en residencial privado, con seguridad y áreas verdes."
+            },
+            "Villa de 3 Niveles en Jarabacoa": {
+                image: "img/ESPECTACULAR VILLA DE 3 NIVELES EN JARABACOA.jpg",
+                location: "Jarabacoa, La Vega",
+                details: ["5 habitaciones", "5 baños", "600 m²", "3 niveles", "Terraza panorámica"],
+                price: "US$ 1,100,000",
+                description: "Villa de lujo con tres niveles, terraza panorámica y acabados premium."
+            }
+        };
+        
+        
+        document.querySelectorAll('.property-card a').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const card = btn.closest('.property-card');
+                const title = card.querySelector('h3').textContent.trim();
+                const data = propertyData[title];
+                if (data) {
+                    modalTitle.textContent = title;
+                    modalImage.src = data.image;
+                    modalImage.alt = title;
+                    modalLocation.innerHTML = `<i class="fas fa-map-marker-alt text-cyan-600 mr-2"></i>${data.location}`;
+                    modalDetails.innerHTML = data.details.map(d => `<li>${d}</li>`).join('');
+                    modalPrice.textContent = data.price;
+                    modalDescription.textContent = data.description;
+                    modal.classList.remove('hidden');
+                }
+            });
+        });
+        
+        // Cerrar modal
+        closeModal.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+        
+        // Cerrar modal al hacer clic fuera del recuadro
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.add('hidden');
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96970390b24fe0b6',t:'MTc1NDIzNjY3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

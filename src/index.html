@@ -16,21 +16,20 @@
     <header class="header">
         <div class="header-top">
             <!-- Logo -->
-            <a href="#" class="logo">
+            <a href="#inicio" class="logo">
                 <span class="logo-icon"><i class="fas fa-building"></i></span>
                 Altura<span style="font-weight: 400; color: #64748b;">Inmobiliaria</span>
             </a>
 
             <!-- Navigation -->
             <nav class="nav-menu">
-                <a href="#" class="nav-link active" onclick="openInfoModal('compra'); return false;">
-                    Compra <i class="fas fa-chevron-down" style="font-size: 0.65rem; margin-left: 0.25rem;"></i>
-                </a>
-                <a href="#" class="nav-link" onclick="openInfoModal('arriendo'); return false;">Arriendo</a>
-                <a href="#" class="nav-link" onclick="openInfoModal('servicios'); return false;">
+                <a href="#inicio" class="nav-link">Inicio</a>
+                <a href="propiedades.html" class="nav-link">Propiedades</a>
+                <a href="#servicios" class="nav-link" onclick="openInfoModal('servicios'); return false;">
                     Servicios <i class="fas fa-chevron-down" style="font-size: 0.65rem; margin-left: 0.25rem;"></i>
                 </a>
-                <a href="#" class="nav-link">Proyectos Nuevos</a>
+                <a href="#nosotros" class="nav-link">Nosotros</a>
+                <a href="#testimonios" class="nav-link">Testimonios</a>
             </nav>
 
             <!-- Actions -->
@@ -38,10 +37,6 @@
                 <button class="btn btn-ghost btn-icon" title="Favoritos">
                     <i class="far fa-heart"></i>
                 </button>
-                <a href="#" class="btn btn-outline">Ingresar</a>
-                <a href="#" class="btn btn-secondary">
-                    <i class="fas fa-plus"></i> Publicar
-                </a>
             </div>
 
             <!-- Mobile Menu Button -->
@@ -51,431 +46,366 @@
             </div>
     </header>
 
-    <!-- Search Section -->
-    <section class="search-section" id="propiedades">
-        <div class="search-container">
-            <!-- Breadcrumb -->
-            <div class="breadcrumb">
-                <a href="#"><i class="fas fa-home"></i></a>
-                <i class="fas fa-chevron-right" style="font-size: 0.6rem;"></i>
-                <a href="#">Compra Nuevo</a>
+    <!-- Hero Section -->
+    <section class="hero-section" id="inicio">
+        <div class="hero-background">
+            <div class="hero-gradient"></div>
+            <div class="hero-pattern"></div>
+        </div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge animate-fade-in-up">
+                    <i class="fas fa-star"></i>
+                    <span>Tu Inmobiliaria de Confianza</span>
                 </div>
-                
-            <h1 class="page-title">Propiedades en Venta - República Dominicana 2025</h1>
+                <h1 class="hero-title animate-fade-in-up" style="animation-delay: 0.1s;">
+                    Encuentra tu <span class="text-gradient">Propiedad Ideal</span> en República Dominicana
+                </h1>
+                <p class="hero-subtitle animate-fade-in-up" style="animation-delay: 0.2s;">
+                    Más de 10 años ayudando a familias y empresas a encontrar el lugar perfecto. 
+                    Compra, vende o alquila con los mejores profesionales del sector.
+                </p>
+                <div class="hero-actions animate-fade-in-up" style="animation-delay: 0.3s;">
+                    <a href="propiedades.html" class="btn btn-primary btn-hero">
+                        <span>Explorar Propiedades</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#servicios" class="btn btn-outline btn-hero">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Ver Video</span>
+                    </a>
+                </div>
+                <div class="hero-stats animate-fade-in-up" style="animation-delay: 0.4s;">
+                    <div class="hero-stat">
+                        <div class="stat-number" data-target="500">0</div>
+                        <div class="stat-label">Propiedades</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="stat-number" data-target="1200">0</div>
+                        <div class="stat-label">Clientes Satisfechos</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="stat-number" data-target="10">0</div>
+                        <div class="stat-label">Años de Experiencia</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image animate-fade-in-right" style="animation-delay: 0.5s;">
+                <div class="hero-image-wrapper">
+                    <div class="floating-card card-1">
+                        <i class="fas fa-home"></i>
+                        <span>Villas de Lujo</span>
+                    </div>
+                    <div class="floating-card card-2">
+                        <i class="fas fa-building"></i>
+                        <span>Apartamentos</span>
+                    </div>
+                    <div class="floating-card card-3">
+                        <i class="fas fa-key"></i>
+                        <span>Alquiler</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <div class="scroll-indicator">
+                <span>Scroll</span>
+                <div class="scroll-line"></div>
+            </div>
+        </div>
+    </section>
 
-            <!-- Search Bar -->
-            <div class="search-bar">
-                <div class="search-input-wrapper">
-                    <i class="fas fa-search search-input-icon"></i>
-                    <input type="text" class="search-input" placeholder="Ciudad, barrio, sector o zona..." id="search-input">
-                    <button class="search-location-btn" title="Usar mi ubicación">
-                        <i class="fas fa-location-crosshairs"></i>
-                    </button>
+    <!-- Features Section -->
+    <section class="features-section" id="servicios">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Nuestros Servicios</span>
+                <h2 class="section-title">¿Por qué elegir <span class="text-gradient">Altura Inmobiliaria</span>?</h2>
+                <p class="section-subtitle">Ofrecemos servicios integrales para hacer realidad tus proyectos inmobiliarios</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="feature-icon">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                    <h3 class="feature-title">Búsqueda Personalizada</h3>
+                    <p class="feature-description">
+                        Analizamos tus necesidades y presupuesto para encontrar las propiedades que mejor se adapten a ti.
+                    </p>
+                    <a href="#" class="feature-link">
+                        Saber más <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
-                
-                <div class="search-actions">
-                    <button class="btn btn-outline" id="filters-btn">
-                        <i class="fas fa-sliders"></i> Filtros
-                    </button>
-                    <button class="btn btn-outline">
-                        <i class="far fa-bell"></i> Crear alerta
-                    </button>
-                    <select class="sort-select" id="sort-select">
-                        <option value="">Ordenar por</option>
-                        <option value="price-asc">Menor precio</option>
-                        <option value="price-desc">Mayor precio</option>
-                        <option value="newest">Más recientes</option>
-                        <option value="area">Mayor área</option>
-                    </select>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                    </div>
+                    <h3 class="feature-title">Asesoría Legal Completa</h3>
+                    <p class="feature-description">
+                        Te acompañamos en todo el proceso legal con documentación segura y transparente.
+                    </p>
+                    <a href="#" class="feature-link">
+                        Saber más <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                    </div>
+                    <h3 class="feature-title">Financiamiento Flexible</h3>
+                    <p class="feature-description">
+                        Te ayudamos a encontrar las mejores opciones de financiamiento para tu inversión.
+                    </p>
+                    <a href="#" class="feature-link">
+                        Saber más <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                    </div>
+                    <h3 class="feature-title">Valoración Profesional</h3>
+                    <p class="feature-description">
+                        Análisis de mercado y valoración precisa para tomar las mejores decisiones.
+                    </p>
+                    <a href="#" class="feature-link">
+                        Saber más <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                    </div>
+                    <h3 class="feature-title">Negociación Experta</h3>
+                    <p class="feature-description">
+                        Nuestro equipo negocia el mejor precio y condiciones en tu nombre.
+                    </p>
+                    <a href="#" class="feature-link">
+                        Saber más <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-icon">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                    </div>
+                    <h3 class="feature-title">Soporte 24/7</h3>
+                    <p class="feature-description">
+                        Atención personalizada cuando la necesites, estamos siempre disponibles.
+                    </p>
+                    <a href="#" class="feature-link">
+                        Saber más <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Main Layout -->
-    <div class="main-layout">
-        <!-- Sidebar Overlay -->
-        <div class="sidebar-overlay" id="sidebar-overlay"></div>
-
-        <!-- Sidebar Filters -->
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <span style="font-weight: 700; color: var(--gray-800);">Filtros</span>
-                <button class="sidebar-close" id="sidebar-close">
-                    Cerrar <i class="fas fa-times"></i>
-                </button>
-            </div>
-            
-            <!-- Price Range -->
-            <div class="filter-section">
-                <h3 class="filter-title">Rango de precio</h3>
-                <div class="filter-row">
-                    <div class="filter-input">
-                        <label class="filter-label">Precio mínimo</label>
-                        <input type="text" class="filter-field" placeholder="Desde $" id="filter-price-min">
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item" data-aos="zoom-in" data-aos-delay="0">
+                    <div class="stat-icon">
+                        <i class="fas fa-home"></i>
                     </div>
-                    <div class="filter-input">
-                        <label class="filter-label">Precio máximo</label>
-                        <input type="text" class="filter-field" placeholder="Hasta $" id="filter-price-max">
+                    <div class="stat-content">
+                        <div class="stat-value" data-target="500">0</div>
+                        <div class="stat-text">Propiedades Disponibles</div>
                     </div>
                 </div>
-            </div>
-                
-            <!-- Category -->
-            <div class="filter-section">
-                <h3 class="filter-title">Categoría</h3>
-                <div class="filter-chips">
-                    <button class="filter-chip active">
-                        <i class="fas fa-check"></i> Compra nuevo
-                    </button>
-                    <button class="filter-chip">
-                        <i class="fas fa-home"></i> Compra usado
-                    </button>
-                    <button class="filter-chip">
-                        <i class="fas fa-key"></i> Arriendo
-                    </button>
+                <div class="stat-item" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" data-target="1200">0</div>
+                        <div class="stat-text">Clientes Satisfechos</div>
                     </div>
                 </div>
-
-            <!-- Property Type -->
-            <div class="filter-section">
-                <h3 class="filter-title">Tipo de inmueble</h3>
-                <div class="filter-chips">
-                    <button class="filter-chip active">Apartamento</button>
-                    <button class="filter-chip">Casa</button>
-                    <button class="filter-chip">Villa</button>
-                    <button class="filter-chip">Penthouse</button>
-                    <button class="filter-chip">Local</button>
-                    <button class="filter-chip">Terreno</button>
+                <div class="stat-item" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" data-target="10">0</div>
+                        <div class="stat-text">Años de Experiencia</div>
+                    </div>
+                </div>
+                <div class="stat-item" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="stat-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" data-target="98">0</div>
+                        <div class="stat-text">% Satisfacción</div>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
 
-            <!-- Bedrooms -->
-            <div class="filter-section">
-                <h3 class="filter-title">Habitaciones</h3>
-                <div class="filter-chips">
-                    <button class="filter-chip">1</button>
-                    <button class="filter-chip">2</button>
-                    <button class="filter-chip active">3</button>
-                    <button class="filter-chip">4</button>
-                    <button class="filter-chip">5+</button>
+    <!-- Testimonials Section -->
+    <section class="testimonials-section" id="testimonios">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Testimonios</span>
+                <h2 class="section-title">Lo que dicen nuestros <span class="text-gradient">clientes</span></h2>
+                <p class="section-subtitle">Experiencias reales de personas que confiaron en nosotros</p>
             </div>
-            </div>
-            
-            <!-- Bathrooms -->
-            <div class="filter-section">
-                <h3 class="filter-title">Baños</h3>
-                <div class="filter-chips">
-                    <button class="filter-chip">1</button>
-                    <button class="filter-chip active">2</button>
-                    <button class="filter-chip">3</button>
-                    <button class="filter-chip">4+</button>
-                    </div>
-                </div>
-                
-            <!-- Area -->
-            <div class="filter-section">
-                <h3 class="filter-title">Área (m²)</h3>
-                <div class="filter-row">
-                    <div class="filter-input">
-                        <label class="filter-label">Mínimo</label>
-                        <input type="text" class="filter-field" placeholder="Desde" id="filter-area-min">
-                    </div>
-                    <div class="filter-input">
-                        <label class="filter-label">Máximo</label>
-                        <input type="text" class="filter-field" placeholder="Hasta" id="filter-area-max">
-                    </div>
-                </div>
-            </div>
-                
-            <!-- Location -->
-            <div class="filter-section">
-                <h3 class="filter-title">Ubicación</h3>
-                <div class="filter-chips">
-                    <button class="filter-chip active">Santo Domingo</button>
-                    <button class="filter-chip">Punta Cana</button>
-                    <button class="filter-chip">Santiago</button>
-                    <button class="filter-chip">Jarabacoa</button>
-                    <button class="filter-chip">La Romana</button>
-                    </div>
-                </div>
-                
-            <!-- Filter Actions -->
-            <div class="filter-actions">
-                <button class="btn-clear">Borrar filtros</button>
-                <button class="btn-apply">Aplicar filtros</button>
+            <div class="testimonials-slider">
+                <div class="testimonials-track">
+                    <div class="testimonial-card active">
+                        <div class="testimonial-content">
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-text">
+                                "Altura Inmobiliaria nos ayudó a encontrar la casa perfecta. El proceso fue muy profesional y siempre estuvieron disponibles para resolver nuestras dudas. ¡Altamente recomendados!"
+                            </p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <img src="./img/Carolina Prudenza.jpeg" alt="Carolina Prudenza">
+                                </div>
+                                <div class="author-info">
+                                    <div class="author-name">Carolina Prudenza</div>
+                                    <div class="author-role">Compradora</div>
+                                </div>
+                            </div>
                         </div>
-        </aside>
-
-        <!-- Results Area -->
-        <main class="results-area">
-            <!-- Results Header -->
-            <div class="results-header">
-                <p class="results-count"><strong>127</strong> resultados encontrados</p>
-                
-                <div class="results-actions">
-                    <label class="checkbox-label">
-                        <input type="checkbox"> Buscar cerca de mí
-                    </label>
-                    <button class="btn-map">
-                        <i class="fas fa-map-marker-alt"></i> Buscar en el mapa
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-text">
+                                "Excelente servicio de principio a fin. Vendimos nuestra propiedad en tiempo récord y con un precio justo. El equipo es muy profesional y conocedor del mercado."
+                            </p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <img src="./img/Clarisa Gómez.jpeg" alt="Clarisa Gómez">
+                                </div>
+                                <div class="author-info">
+                                    <div class="author-name">Clarisa Gómez</div>
+                                    <div class="author-role">Vendedora</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-text">
+                                "Alquilamos un apartamento a través de Altura Inmobiliaria y todo fue perfecto. El contrato fue claro, el proceso rápido y siempre tuvieron una respuesta para nuestras preguntas."
+                            </p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <img src="./img/Yasmín Morel.jpeg" alt="Yasmín Morel">
+                                </div>
+                                <div class="author-info">
+                                    <div class="author-name">Yasmín Morel</div>
+                                    <div class="author-role">Inquilina</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonials-controls">
+                    <button class="testimonial-btn prev" onclick="changeTestimonial(-1)">
+                        <i class="fas fa-chevron-left"></i>
                     </button>
+                    <div class="testimonials-dots">
+                        <span class="dot active" onclick="goToTestimonial(0)"></span>
+                        <span class="dot" onclick="goToTestimonial(1)"></span>
+                        <span class="dot" onclick="goToTestimonial(2)"></span>
+                    </div>
+                    <button class="testimonial-btn next" onclick="changeTestimonial(1)">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="nosotros">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text" data-aos="fade-right">
+                    <span class="section-badge">Sobre Nosotros</span>
+                    <h2 class="section-title">Tu socio de confianza en <span class="text-gradient">bienes raíces</span></h2>
+                    <p class="about-description">
+                        Con más de 10 años de experiencia en el mercado inmobiliario dominicano, Altura Inmobiliaria se ha consolidado como una de las empresas líderes en el sector. Nos especializamos en ofrecer soluciones integrales para compra, venta y alquiler de propiedades.
+                    </p>
+                    <p class="about-description">
+                        Nuestro equipo de profesionales altamente capacitados está comprometido con la excelencia y la satisfacción del cliente. Utilizamos tecnología de vanguardia y un enfoque personalizado para cada proyecto.
+                    </p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Equipo profesional certificado</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Tecnología de última generación</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Atención personalizada 24/7</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Transparencia en cada transacción</span>
+                        </div>
+                    </div>
+                    <a href="propiedades.html" class="btn btn-primary">
+                        <span>Ver Propiedades</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="about-image" data-aos="fade-left">
+                    <div class="about-image-wrapper">
+                        <img src="./img/about-us.jpg" alt="Altura Inmobiliaria - Equipo profesional" class="about-bg-image" onerror="this.style.display='none';">
+                        <div class="about-image-overlay"></div>
+                        <div class="about-card card-1">
+                            <i class="fas fa-award"></i>
+                            <span>Premio Excelencia 2024</span>
+                        </div>
+                        <div class="about-card card-2">
+                            <i class="fas fa-handshake"></i>
+                            <span>+1200 Clientes</span>
+                        </div>
                     </div>
                 </div>
-                
-            <!-- Properties Grid -->
-            <div class="properties-grid" id="properties-grid">
-                <!-- Property Card 1 -->
-                <article class="property-card animate-slide-up">
-                    <div class="property-image-wrapper">
-                        <img src="./img/Villa Punta Cana.jpg" alt="Villa de Lujo en Punta Cana" class="property-image" loading="lazy">
-                        <span class="property-badge badge-immediate">Entrega Inmediata</span>
-                        <button class="property-favorite" aria-label="Agregar a favoritos">
-                            <i class="far fa-heart"></i>
-                        </button>
-                        <button class="property-gallery-nav prev"><i class="fas fa-chevron-left"></i></button>
-                        <button class="property-gallery-nav next"><i class="fas fa-chevron-right"></i></button>
-                        </div>
-                    <div class="property-content">
-                        <p class="property-price-label">Desde:</p>
-                        <p class="property-price">$850,000 USD</p>
-                        <h3 class="property-title">Villa de Lujo en Punta Cana</h3>
-                        <p class="property-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            Punta Cana, La Altagracia
-                        </p>
-                        <div class="property-features">
-                            <span class="property-feature"><i class="fas fa-ruler-combined"></i> 450 m²</span>
-                            <span class="property-feature"><i class="fas fa-bed"></i> 5 Hab.</span>
-                            <span class="property-feature"><i class="fas fa-bath"></i> 4 Baños</span>
-                            <span class="property-feature"><i class="fas fa-car"></i> 2 Parq.</span>
-                    </div>
-                            </div>
-                </article>
-
-                <!-- Property Card 2 -->
-                <article class="property-card animate-slide-up" style="animation-delay: 0.1s;">
-                    <div class="property-image-wrapper">
-                        <img src="./img/¡Elegancia Natural en Jarabacoa! Villa de Lujo con Piscina Infinity.jpg" alt="Villa con Piscina Infinity" class="property-image" loading="lazy">
-                        <span class="property-badge badge-construction">En Construcción</span>
-                        <button class="property-favorite" aria-label="Agregar a favoritos">
-                            <i class="far fa-heart"></i>
-                        </button>
-                        </div>
-                    <div class="property-content">
-                        <p class="property-price-label">Desde:</p>
-                        <p class="property-price">$1,200 USD/mes</p>
-                        <h3 class="property-title">Villa con Piscina Infinity en Jarabacoa</h3>
-                        <p class="property-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            Jarabacoa, La Vega
-                        </p>
-                        <div class="property-features">
-                            <span class="property-feature"><i class="fas fa-ruler-combined"></i> 120 m²</span>
-                            <span class="property-feature"><i class="fas fa-bed"></i> 3 Hab.</span>
-                            <span class="property-feature"><i class="fas fa-bath"></i> 2 Baños</span>
-                            <span class="property-feature"><i class="fas fa-car"></i> 1 Parq.</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Property Card 3 -->
-                <article class="property-card animate-slide-up" style="animation-delay: 0.2s;">
-                    <div class="property-image-wrapper">
-                        <img src="./img/Casa Jarabacoa.jpg" alt="Apartamento Vista al Mar" class="property-image" loading="lazy">
-                        <span class="property-badge badge-plans">Sobre Planos</span>
-                        <button class="property-favorite" aria-label="Agregar a favoritos">
-                            <i class="far fa-heart"></i>
-                        </button>
             </div>
-                    <div class="property-content">
-                        <p class="property-price-label">Desde:</p>
-                        <p class="property-price">$320,000 USD</p>
-                        <h3 class="property-title">Apartamento Vista al Mar - La Esperilla</h3>
-                        <p class="property-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            La Esperilla, Santo Domingo
-                        </p>
-                        <div class="property-features">
-                            <span class="property-feature"><i class="fas fa-ruler-combined"></i> 280 m²</span>
-                            <span class="property-feature"><i class="fas fa-bed"></i> 4 Hab.</span>
-                            <span class="property-feature"><i class="fas fa-bath"></i> 3 Baños</span>
-                            <span class="property-feature"><i class="fas fa-car"></i> 2 Parq.</span>
         </div>
-            </div>
-                </article>
-
-                <!-- Property Card 4 -->
-                <article class="property-card animate-slide-up" style="animation-delay: 0.3s;">
-                    <div class="property-image-wrapper">
-                        <img src="./img/ESPECTACULAR VILLA DE 3 NIVELES EN JARABACOA.jpg" alt="Villa de 3 Niveles" class="property-image" loading="lazy">
-                        <span class="property-badge badge-immediate">Entrega Inmediata</span>
-                        <button class="property-favorite active" aria-label="Quitar de favoritos">
-                            <i class="fas fa-heart"></i>
-                        </button>
-                    </div>
-                    <div class="property-content">
-                        <p class="property-price-label">Desde:</p>
-                        <p class="property-price">$1,500,000 USD</p>
-                        <h3 class="property-title">Espectacular Villa de 3 Niveles</h3>
-                        <p class="property-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            Jarabacoa, La Vega
-                        </p>
-                        <div class="property-features">
-                            <span class="property-feature"><i class="fas fa-ruler-combined"></i> 700 m²</span>
-                            <span class="property-feature"><i class="fas fa-bed"></i> 6 Hab.</span>
-                            <span class="property-feature"><i class="fas fa-bath"></i> 6 Baños</span>
-                            <span class="property-feature"><i class="fas fa-car"></i> 4 Parq.</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Property Card 5 -->
-                <article class="property-card animate-slide-up" style="animation-delay: 0.4s;">
-                    <div class="property-image-wrapper">
-                        <img src="./img/Apartamento Moderno en Santo Domingo (2).jpg" alt="Apartamento Moderno en Piantini" class="property-image" loading="lazy">
-                        <span class="property-badge badge-construction">En Construcción</span>
-                        <button class="property-favorite" aria-label="Agregar a favoritos">
-                            <i class="far fa-heart"></i>
-                        </button>
-                    </div>
-                    <div class="property-content">
-                        <p class="property-price-label">Desde:</p>
-                        <p class="property-price">$950 USD/mes</p>
-                        <h3 class="property-title">Apartamento Moderno en Piantini</h3>
-                        <p class="property-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            Piantini, Santo Domingo
-                        </p>
-                        <div class="property-features">
-                            <span class="property-feature"><i class="fas fa-ruler-combined"></i> 100 m²</span>
-                            <span class="property-feature"><i class="fas fa-bed"></i> 2 Hab.</span>
-                            <span class="property-feature"><i class="fas fa-bath"></i> 2 Baños</span>
-                            <span class="property-feature"><i class="fas fa-car"></i> 1 Parq.</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Property Card 6 -->
-                <article class="property-card animate-slide-up" style="animation-delay: 0.5s;">
-                    <div class="property-image-wrapper">
-                        <img src="./img/Apartamentos en Prado Oriental, San Isidro.jpg" alt="Apartamentos en Prado Oriental" class="property-image" loading="lazy">
-                        <span class="property-badge badge-plans">Sobre Planos</span>
-                        <button class="property-favorite" aria-label="Agregar a favoritos">
-                            <i class="far fa-heart"></i>
-                        </button>
-                    </div>
-                    <div class="property-content">
-                        <p class="property-price-label">Desde:</p>
-                        <p class="property-price">$120,000 USD</p>
-                        <h3 class="property-title">Apartamentos en Prado Oriental</h3>
-                        <p class="property-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            San Isidro, Santo Domingo Este
-                        </p>
-                        <div class="property-features">
-                            <span class="property-feature"><i class="fas fa-ruler-combined"></i> 110 m²</span>
-                            <span class="property-feature"><i class="fas fa-bed"></i> 3 Hab.</span>
-                            <span class="property-feature"><i class="fas fa-bath"></i> 2 Baños</span>
-                            <span class="property-feature"><i class="fas fa-car"></i> 1 Parq.</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Property Card 7 -->
-                <article class="property-card animate-slide-up" style="animation-delay: 0.6s;">
-                    <div class="property-image-wrapper">
-                        <img src="./img/Apartamento Moderno en Santo Domingo.jpg" alt="Penthouse en Naco" class="property-image" loading="lazy">
-                        <span class="property-badge badge-immediate">Entrega Inmediata</span>
-                        <button class="property-favorite" aria-label="Agregar a favoritos">
-                            <i class="far fa-heart"></i>
-                        </button>
-            </div>
-                    <div class="property-content">
-                        <p class="property-price-label">Desde:</p>
-                        <p class="property-price">$485,000 USD</p>
-                        <h3 class="property-title">Penthouse de Lujo en Naco</h3>
-                        <p class="property-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            Naco, Santo Domingo
-                        </p>
-                        <div class="property-features">
-                            <span class="property-feature"><i class="fas fa-ruler-combined"></i> 220 m²</span>
-                            <span class="property-feature"><i class="fas fa-bed"></i> 3 Hab.</span>
-                            <span class="property-feature"><i class="fas fa-bath"></i> 3 Baños</span>
-                            <span class="property-feature"><i class="fas fa-car"></i> 2 Parq.</span>
-                    </div>
-                            </div>
-                </article>
-
-                <!-- Property Card 8 -->
-                <article class="property-card animate-slide-up" style="animation-delay: 0.7s;">
-                    <div class="property-image-wrapper">
-                        <img src="./img/bv.jpg" alt="Casa en Las Terrenas" class="property-image" loading="lazy">
-                        <span class="property-badge badge-construction">En Construcción</span>
-                        <button class="property-favorite" aria-label="Agregar a favoritos">
-                            <i class="far fa-heart"></i>
-                        </button>
-                    </div>
-                    <div class="property-content">
-                        <p class="property-price-label">Desde:</p>
-                        <p class="property-price">$275,000 USD</p>
-                        <h3 class="property-title">Casa Moderna en Las Terrenas</h3>
-                        <p class="property-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            Las Terrenas, Samaná
-                        </p>
-                        <div class="property-features">
-                            <span class="property-feature"><i class="fas fa-ruler-combined"></i> 180 m²</span>
-                            <span class="property-feature"><i class="fas fa-bed"></i> 3 Hab.</span>
-                            <span class="property-feature"><i class="fas fa-bath"></i> 2 Baños</span>
-                            <span class="property-feature"><i class="fas fa-car"></i> 2 Parq.</span>
-                            </div>
-                                </div>
-                </article>
-
-                <!-- Property Card 9 -->
-                <article class="property-card animate-slide-up" style="animation-delay: 0.8s;">
-                    <div class="property-image-wrapper">
-                        <img src="./img/kkmn.jpg" alt="Proyecto Residencial" class="property-image" loading="lazy">
-                        <span class="property-badge badge-plans">Sobre Planos</span>
-                        <button class="property-favorite" aria-label="Agregar a favoritos">
-                            <i class="far fa-heart"></i>
-                        </button>
-                    </div>
-                    <div class="property-content">
-                        <p class="property-price-label">Desde:</p>
-                        <p class="property-price">$95,000 USD</p>
-                        <h3 class="property-title">Proyecto Residencial Los Prados</h3>
-                        <p class="property-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            Los Prados, Santo Domingo
-                        </p>
-                        <div class="property-features">
-                            <span class="property-feature"><i class="fas fa-ruler-combined"></i> 85 m²</span>
-                            <span class="property-feature"><i class="fas fa-bed"></i> 2 Hab.</span>
-                            <span class="property-feature"><i class="fas fa-bath"></i> 2 Baños</span>
-                            <span class="property-feature"><i class="fas fa-car"></i> 1 Parq.</span>
-                            </div>
-                                </div>
-                </article>
-                            </div>
-
-            <!-- Pagination -->
-            <nav class="pagination" aria-label="Paginación">
-                <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
-                <button class="pagination-btn active">1</button>
-                <button class="pagination-btn">2</button>
-                <button class="pagination-btn">3</button>
-                <button class="pagination-btn">4</button>
-                <button class="pagination-btn">5</button>
-                <span style="color: var(--gray-400);">...</span>
-                <button class="pagination-btn">12</button>
-                <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
-            </nav>
-        </main>
-            </div>
+    </section>
             
     <!-- Footer -->
     <footer class="footer">
@@ -552,7 +482,7 @@
     </button>
 
     <!-- WhatsApp Button -->
-    <a href="https://wa.me/18095557890" class="whatsapp-btn" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+    <a href="https://wa.me/1" class="whatsapp-btn" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -611,7 +541,7 @@
                 </div>
                 <div style="background: var(--gray-100); padding: 1rem; border-radius: 0.5rem; margin-top: 1.5rem;">
                     <p style="color: var(--gray-700); font-size: 0.9rem; margin-bottom: 0.75rem;"><strong>¿Listo para comenzar?</strong></p>
-                    <a href="#propiedades" class="btn btn-primary" onclick="closeInfoModal('compra')">Ver Propiedades Disponibles</a>
+                    <a href="propiedades.html" class="btn btn-primary" onclick="closeInfoModal('compra')">Ver Propiedades Disponibles</a>
                 </div>
             </div>
         </div>
@@ -676,56 +606,116 @@
                 </div>
                 <div style="background: var(--gray-100); padding: 1rem; border-radius: 0.5rem; margin-top: 1.5rem;">
                     <p style="color: var(--gray-700); font-size: 0.9rem; margin-bottom: 0.75rem;"><strong>¿Buscas alquilar?</strong></p>
-                    <a href="#propiedades" class="btn btn-primary" onclick="closeInfoModal('arriendo')">Ver Propiedades en Arriendo</a>
+                    <a href="propiedades.html" class="btn btn-primary" onclick="closeInfoModal('arriendo')">Ver Propiedades en Arriendo</a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Servicios Modal -->
-    <div class="modal-overlay" id="modal-servicios">
-        <div class="modal-content" style="max-width: 700px;">
-            <div class="modal-header">
-                <h3 class="modal-title">Nuestros Servicios</h3>
-                <button class="modal-close" onclick="closeInfoModal('servicios')"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="modal-body">
-                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
-                    <div style="background: var(--gray-50); padding: 1.25rem; border-radius: 0.75rem; border-top: 4px solid var(--primary);">
-                        <div style="width: 50px; height: 50px; background: var(--primary); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem;">
-                            <i class="fas fa-home" style="color: white;"></i>
-                        </div>
-                        <h5 style="font-weight: 700; color: var(--gray-900); margin-bottom: 0.5rem;">Compra</h5>
-                        <p style="color: var(--gray-600); font-size: 0.85rem; line-height: 1.5;">Búsqueda personalizada, asesoría legal y financiera completa.</p>
+    <div class="modal-overlay servicios-modal-overlay" id="modal-servicios">
+        <div class="modal-content servicios-modal-content">
+            <div class="servicios-modal-header">
+                <div class="servicios-header-content">
+                    <div class="servicios-header-icon">
+                        <i class="fas fa-briefcase"></i>
                     </div>
-                    <div style="background: var(--gray-50); padding: 1.25rem; border-radius: 0.75rem; border-top: 4px solid var(--primary);">
-                        <div style="width: 50px; height: 50px; background: var(--primary); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem;">
-                            <i class="fas fa-hand-holding-usd" style="color: white;"></i>
-                        </div>
-                        <h5 style="font-weight: 700; color: var(--gray-900); margin-bottom: 0.5rem;">Venta</h5>
-                        <p style="color: var(--gray-600); font-size: 0.85rem; line-height: 1.5;">Valoración profesional, marketing y negociación experta.</p>
-                    </div>
-                    <div style="background: var(--gray-50); padding: 1.25rem; border-radius: 0.75rem; border-top: 4px solid var(--primary);">
-                        <div style="width: 50px; height: 50px; background: var(--primary); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem;">
-                            <i class="fas fa-key" style="color: white;"></i>
-                        </div>
-                        <h5 style="font-weight: 700; color: var(--gray-900); margin-bottom: 0.5rem;">Arriendo</h5>
-                        <p style="color: var(--gray-600); font-size: 0.85rem; line-height: 1.5;">Alquiler residencial y comercial con contratos seguros.</p>
-                    </div>
-                    <div style="background: var(--gray-50); padding: 1.25rem; border-radius: 0.75rem; border-top: 4px solid var(--primary);">
-                        <div style="width: 50px; height: 50px; background: var(--primary); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem;">
-                            <i class="fas fa-chart-line" style="color: white;"></i>
-                        </div>
-                        <h5 style="font-weight: 700; color: var(--gray-900); margin-bottom: 0.5rem;">Inversiones</h5>
-                        <p style="color: var(--gray-600); font-size: 0.85rem; line-height: 1.5;">Asesoría para inversiones inmobiliarias rentables.</p>
+                    <div>
+                        <h3 class="servicios-modal-title">Nuestros Servicios</h3>
+                        <p class="servicios-modal-subtitle">Soluciones integrales para todas tus necesidades inmobiliarias</p>
                     </div>
                 </div>
-                <div style="background: var(--primary); background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; padding: 1.5rem; border-radius: 0.75rem;">
-                    <h5 style="font-weight: 700; margin-bottom: 0.75rem; font-size: 1.1rem;">¿Necesitas más información?</h5>
-                    <p style="margin-bottom: 1rem; opacity: 0.95;">Nuestro equipo está listo para ayudarte. Contáctanos y te responderemos a la brevedad.</p>
-                    <a href="https://wa.me/18095557890" target="_blank" class="btn" style="background: white; color: var(--primary);">
-                        <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
-                    </a>
+                <button class="modal-close servicios-close-btn" onclick="closeInfoModal('servicios')" aria-label="Cerrar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="servicios-modal-body">
+                <div class="servicios-grid">
+                    <div class="servicio-card" data-aos="fade-up" data-aos-delay="0">
+                        <div class="servicio-icon-wrapper">
+                            <div class="servicio-icon-bg servicio-icon-1">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div class="servicio-icon-shine"></div>
+                        </div>
+                        <h4 class="servicio-title">Compra</h4>
+                        <p class="servicio-description">Búsqueda personalizada, asesoría legal y financiera completa para encontrar la propiedad ideal.</p>
+                        <ul class="servicio-features">
+                            <li><i class="fas fa-check-circle"></i> Búsqueda personalizada</li>
+                            <li><i class="fas fa-check-circle"></i> Asesoría legal completa</li>
+                            <li><i class="fas fa-check-circle"></i> Financiamiento y créditos</li>
+                        </ul>
+                    </div>
+
+                    <div class="servicio-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="servicio-icon-wrapper">
+                            <div class="servicio-icon-bg servicio-icon-2">
+                                <i class="fas fa-hand-holding-usd"></i>
+                            </div>
+                            <div class="servicio-icon-shine"></div>
+                        </div>
+                        <h4 class="servicio-title">Venta</h4>
+                        <p class="servicio-description">Valoración profesional, marketing estratégico y negociación experta para maximizar tu inversión.</p>
+                        <ul class="servicio-features">
+                            <li><i class="fas fa-check-circle"></i> Valoración profesional</li>
+                            <li><i class="fas fa-check-circle"></i> Marketing estratégico</li>
+                            <li><i class="fas fa-check-circle"></i> Negociación experta</li>
+                        </ul>
+                    </div>
+
+                    <div class="servicio-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="servicio-icon-wrapper">
+                            <div class="servicio-icon-bg servicio-icon-3">
+                                <i class="fas fa-key"></i>
+                            </div>
+                            <div class="servicio-icon-shine"></div>
+                        </div>
+                        <h4 class="servicio-title">Arriendo</h4>
+                        <p class="servicio-description">Alquiler residencial y comercial con contratos seguros y gestión profesional de propiedades.</p>
+                        <ul class="servicio-features">
+                            <li><i class="fas fa-check-circle"></i> Alquiler residencial</li>
+                            <li><i class="fas fa-check-circle"></i> Alquiler comercial</li>
+                            <li><i class="fas fa-check-circle"></i> Contratos seguros</li>
+                        </ul>
+                    </div>
+
+                    <div class="servicio-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="servicio-icon-wrapper">
+                            <div class="servicio-icon-bg servicio-icon-4">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="servicio-icon-shine"></div>
+                        </div>
+                        <h4 class="servicio-title">Inversiones</h4>
+                        <p class="servicio-description">Asesoría especializada para inversiones inmobiliarias rentables y estrategias de crecimiento.</p>
+                        <ul class="servicio-features">
+                            <li><i class="fas fa-check-circle"></i> Análisis de mercado</li>
+                            <li><i class="fas fa-check-circle"></i> Estrategias de inversión</li>
+                            <li><i class="fas fa-check-circle"></i> ROI optimizado</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="servicios-cta">
+                    <div class="servicios-cta-content">
+                        <div class="servicios-cta-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="servicios-cta-text">
+                            <h4 class="servicios-cta-title">¿Necesitas más información?</h4>
+                            <p class="servicios-cta-description">Nuestro equipo de expertos está listo para ayudarte. Contáctanos y te responderemos a la brevedad.</p>
+                        </div>
+                    </div>
+                    <div class="servicios-cta-actions">
+                        <a href="https://wa.me/1" target="_blank" class="btn btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>Contactar por WhatsApp</span>
+                        </a>
+                        <a href="#contacto" class="btn btn-outline btn-white" onclick="closeInfoModal('servicios'); return false;">
+                            <i class="fas fa-envelope"></i>
+                            <span>Enviar Email</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

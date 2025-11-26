@@ -3,6 +3,15 @@
  * Main JavaScript
  */
 
+// ===== CONSTANTS =====
+const typeLabels = {
+  'apartamento': 'Apartamento',
+  'casa': 'Casa',
+  'villa': 'Villa',
+  'penthouse': 'Penthouse',
+  'terreno': 'Terreno'
+};
+
 // ===== PROPERTY DATA =====
 const propertiesData = [
   {
@@ -189,7 +198,15 @@ let currentFilters = {
   locations: []
 };
 
-let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+let favorites = (() => {
+  try {
+    const stored = localStorage.getItem('favorites');
+    return stored ? JSON.parse(stored) : [];
+  } catch (error) {
+    console.error('Error loading favorites from localStorage:', error);
+    return [];
+  }
+})();
 let currentPage = 1;
 const itemsPerPage = 9;
 
@@ -204,6 +221,9 @@ function initializeApp() {
   initializeEventListeners();
   initializeSmoothScroll();
   initializeContactForm();
+  initializeAnimations();
+  initializeTestimonials();
+  initializeCounters();
   console.log('Altura Inmobiliaria - Portal Ready');
 }
 
@@ -216,29 +236,73 @@ function initializeEventListeners() {
   const sidebarOverlay = document.getElementById('sidebar-overlay');
   const sidebarClose = document.getElementById('sidebar-close');
 
-  filtersBtn?.addEventListener('click', () => {
-    sidebar?.classList.add('open');
-    sidebarOverlay?.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  });
+  // Función para abrir el sidebar
+  function openSidebar() {
+    if (sidebar) {
+      sidebar.classList.add('open');
+      if (sidebarOverlay) {
+        sidebarOverlay.classList.add('active');
+      }
+      // Solo ocultar scroll en móvil/tablet (menor a 1024px)
+      if (window.innerWidth < 1024) {
+        document.body.style.overflow = 'hidden';
+      }
+    }
+  }
 
-  mobileFilterBtn?.addEventListener('click', () => {
-    sidebar?.classList.add('open');
-    sidebarOverlay?.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  });
+  // Función para cerrar el sidebar
+  function closeSidebar() {
+    if (sidebar) {
+      sidebar.classList.remove('open');
+      if (sidebarOverlay) {
+        sidebarOverlay.classList.remove('active');
+      }
+      // Restaurar scroll siempre
+      document.body.style.overflow = '';
+    }
+  }
 
-  sidebarClose?.addEventListener('click', () => {
-    sidebar?.classList.remove('open');
-    sidebarOverlay?.classList.remove('active');
-    document.body.style.overflow = '';
-  });
+  // Event listeners
+  if (filtersBtn) {
+    filtersBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      // Solo abrir sidebar en móvil/tablet (menor a 1024px)
+      // En desktop el sidebar ya está visible
+      if (window.innerWidth < 1024) {
+        openSidebar();
+      } else {
+        // En desktop, hacer scroll suave al sidebar si está fuera de vista
+        if (sidebar) {
+          sidebar.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }
+    });
+  }
 
-  sidebarOverlay?.addEventListener('click', () => {
-    sidebar?.classList.remove('open');
-    sidebarOverlay?.classList.remove('active');
-    document.body.style.overflow = '';
-  });
+  if (mobileFilterBtn) {
+    mobileFilterBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openSidebar();
+    });
+  }
+
+  if (sidebarClose) {
+    sidebarClose.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeSidebar();
+    });
+  }
+
+  if (sidebarOverlay) {
+    sidebarOverlay.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeSidebar();
+    });
+  }
 
   // Search
   const searchInput = document.getElementById('search-input');
@@ -297,9 +361,7 @@ function initializeEventListeners() {
   btnClear?.addEventListener('click', clearAllFilters);
   btnApply?.addEventListener('click', () => {
     if (window.innerWidth < 1024) {
-      sidebar?.classList.remove('open');
-      sidebarOverlay?.classList.remove('active');
-      document.body.style.overflow = '';
+      closeSidebar();
     }
     showToast('Filtros aplicados');
   });
@@ -307,11 +369,9 @@ function initializeEventListeners() {
   // Keyboard
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      if (sidebar?.classList.contains('open')) {
-        sidebar.classList.remove('open');
-        sidebarOverlay?.classList.remove('active');
-        document.body.style.overflow = '';
-      }
+    if (sidebar?.classList.contains('open')) {
+      closeSidebar();
+    }
       document.querySelectorAll('.modal-overlay.active').forEach(modal => {
         modal.classList.remove('active');
         document.body.style.overflow = '';
@@ -400,145 +460,180 @@ function clearAllFilters() {
 
 // ===== FILTER PROPERTIES =====
 function filterProperties() {
-  let filtered = [...propertiesData];
+  try {
+    let filtered = [...propertiesData];
 
-  // Search
-  if (currentFilters.search) {
-    filtered = filtered.filter(p => 
-      p.title.toLowerCase().includes(currentFilters.search) ||
-      p.location.toLowerCase().includes(currentFilters.search)
-    );
-  }
-
-  // Category
-  if (currentFilters.category) {
-    if (currentFilters.category === 'compra nuevo' || currentFilters.category === 'compra usado') {
-      filtered = filtered.filter(p => p.priceType === 'venta');
-    } else if (currentFilters.category === 'arriendo') {
-      filtered = filtered.filter(p => p.priceType === 'alquiler');
+    // Search
+    if (currentFilters.search) {
+      const searchLower = currentFilters.search.toLowerCase();
+      filtered = filtered.filter(p => 
+        (p.title?.toLowerCase().includes(searchLower)) ||
+        (p.location?.toLowerCase().includes(searchLower)) ||
+        (p.description?.toLowerCase().includes(searchLower))
+      );
     }
-  }
 
-  // Type
-  if (currentFilters.types.length > 0) {
-    filtered = filtered.filter(p => currentFilters.types.includes(p.type));
-  }
-
-  // Bedrooms
-  if (currentFilters.bedrooms) {
-    const beds = parseInt(currentFilters.bedrooms);
-    if (currentFilters.bedrooms === '5') {
-      filtered = filtered.filter(p => p.bedrooms >= 5);
-    } else {
-      filtered = filtered.filter(p => p.bedrooms === beds);
+    // Category
+    if (currentFilters.category) {
+      if (currentFilters.category === 'compra nuevo' || currentFilters.category === 'compra usado') {
+        filtered = filtered.filter(p => p.priceType === 'venta');
+      } else if (currentFilters.category === 'arriendo') {
+        filtered = filtered.filter(p => p.priceType === 'alquiler');
+      }
     }
-  }
 
-  // Bathrooms
-  if (currentFilters.bathrooms) {
-    const baths = parseInt(currentFilters.bathrooms);
-    if (currentFilters.bathrooms === '4') {
-      filtered = filtered.filter(p => p.bathrooms >= 4);
-    } else {
-      filtered = filtered.filter(p => p.bathrooms === baths);
+    // Type
+    if (currentFilters.types.length > 0) {
+      filtered = filtered.filter(p => currentFilters.types.includes(p.type));
     }
-  }
 
-  // Price
-  if (currentFilters.priceMin) {
-    filtered = filtered.filter(p => p.price >= currentFilters.priceMin);
-  }
-  if (currentFilters.priceMax) {
-    filtered = filtered.filter(p => p.price <= currentFilters.priceMax);
-  }
-
-  // Area
-  if (currentFilters.areaMin) {
-    filtered = filtered.filter(p => p.area >= currentFilters.areaMin);
-  }
-  if (currentFilters.areaMax) {
-    filtered = filtered.filter(p => p.area <= currentFilters.areaMax);
-  }
-
-  // Location
-  if (currentFilters.locations && currentFilters.locations.length > 0) {
-    filtered = filtered.filter(p => currentFilters.locations.includes(p.locationKey));
-  }
-
-  // Sort
-  const sortSelect = document.getElementById('sort-select');
-  const sortValue = sortSelect?.value;
-  if (sortValue) {
-    switch (sortValue) {
-      case 'price-asc':
-        filtered.sort((a, b) => a.price - b.price);
-        break;
-      case 'price-desc':
-        filtered.sort((a, b) => b.price - a.price);
-        break;
-      case 'newest':
-        filtered.sort((a, b) => b.id - a.id);
-        break;
-      case 'area':
-        filtered.sort((a, b) => b.area - a.area);
-        break;
+    // Bedrooms
+    if (currentFilters.bedrooms) {
+      const beds = parseInt(currentFilters.bedrooms);
+      if (currentFilters.bedrooms === '5') {
+        filtered = filtered.filter(p => p.bedrooms >= 5);
+      } else if (!isNaN(beds)) {
+        filtered = filtered.filter(p => p.bedrooms === beds);
+      }
     }
-  }
 
-  return filtered;
+    // Bathrooms
+    if (currentFilters.bathrooms) {
+      const baths = parseInt(currentFilters.bathrooms);
+      if (currentFilters.bathrooms === '4') {
+        filtered = filtered.filter(p => p.bathrooms >= 4);
+      } else if (!isNaN(baths)) {
+        filtered = filtered.filter(p => p.bathrooms === baths);
+      }
+    }
+
+    // Price
+    if (currentFilters.priceMin != null && !isNaN(currentFilters.priceMin)) {
+      filtered = filtered.filter(p => p.price >= currentFilters.priceMin);
+    }
+    if (currentFilters.priceMax != null && !isNaN(currentFilters.priceMax)) {
+      filtered = filtered.filter(p => p.price <= currentFilters.priceMax);
+    }
+
+    // Area
+    if (currentFilters.areaMin != null && !isNaN(currentFilters.areaMin)) {
+      filtered = filtered.filter(p => p.area >= currentFilters.areaMin);
+    }
+    if (currentFilters.areaMax != null && !isNaN(currentFilters.areaMax)) {
+      filtered = filtered.filter(p => p.area <= currentFilters.areaMax);
+    }
+
+    // Location
+    if (currentFilters.locations && currentFilters.locations.length > 0) {
+      filtered = filtered.filter(p => currentFilters.locations.includes(p.locationKey));
+    }
+
+    // Sort
+    const sortSelect = document.getElementById('sort-select');
+    const sortValue = sortSelect?.value;
+    if (sortValue) {
+      switch (sortValue) {
+        case 'price-asc':
+          filtered.sort((a, b) => (a.price || 0) - (b.price || 0));
+          break;
+        case 'price-desc':
+          filtered.sort((a, b) => (b.price || 0) - (a.price || 0));
+          break;
+        case 'newest':
+          filtered.sort((a, b) => (b.id || 0) - (a.id || 0));
+          break;
+        case 'area':
+          filtered.sort((a, b) => (b.area || 0) - (a.area || 0));
+          break;
+      }
+    }
+
+    return filtered;
+  } catch (error) {
+    console.error('Error filtering properties:', error);
+    return [];
+  }
 }
 
 // ===== RENDER PROPERTIES =====
 function renderProperties() {
-  const filtered = filterProperties();
-  const totalItems = filtered.length;
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
-  
-  // Update count
-  const resultsCount = document.querySelector('.results-count strong');
-  if (resultsCount) {
-    resultsCount.textContent = totalItems;
-  }
+  try {
+    const filtered = filterProperties();
+    const totalItems = filtered.length;
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    
+    // Update count
+    const resultsCount = document.querySelector('.results-count strong');
+    if (resultsCount) {
+      resultsCount.textContent = totalItems;
+    }
 
-  // Paginate
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedItems = filtered.slice(startIndex, startIndex + itemsPerPage);
+    // Paginate
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const paginatedItems = filtered.slice(startIndex, startIndex + itemsPerPage);
 
-  // Render cards
-  const propertiesGrid = document.getElementById('properties-grid');
-  if (propertiesGrid) {
-    propertiesGrid.innerHTML = paginatedItems.map((property, index) => `
-      <article class="property-card animate-slide-up" style="animation-delay: ${index * 0.05}s" data-id="${property.id}" onclick="openPropertyDetail(${property.id})">
-        <div class="property-image-wrapper">
-          <img src="${property.image}" alt="${property.title}" class="property-image" loading="lazy">
-          <span class="property-badge badge-${property.status === 'inmediata' ? 'immediate' : property.status === 'construccion' ? 'construction' : 'plans'}">
-            ${property.status === 'inmediata' ? 'Entrega Inmediata' : property.status === 'construccion' ? 'En Construcción' : 'Sobre Planos'}
-          </span>
-          <button class="property-favorite ${favorites.includes(property.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(event, ${property.id})" aria-label="Agregar a favoritos">
-            <i class="${favorites.includes(property.id) ? 'fas' : 'far'} fa-heart"></i>
-          </button>
-        </div>
-        <div class="property-content">
-          <p class="property-price-label">Desde:</p>
-          <p class="property-price">${formatPrice(property.price, property.priceType)}</p>
-          <h3 class="property-title">${property.title}</h3>
-          <p class="property-location">
-            <i class="fas fa-map-marker-alt"></i>
-            ${property.location}
-          </p>
-          <div class="property-features">
-            <span class="property-feature"><i class="fas fa-ruler-combined"></i> ${property.area} m²</span>
-            <span class="property-feature"><i class="fas fa-bed"></i> ${property.bedrooms} Hab.</span>
-            <span class="property-feature"><i class="fas fa-bath"></i> ${property.bathrooms} Baños</span>
-            <span class="property-feature"><i class="fas fa-car"></i> ${property.parking} Parq.</span>
+    // Render cards
+    const propertiesGrid = document.getElementById('properties-grid');
+    if (propertiesGrid) {
+      if (paginatedItems.length === 0) {
+        propertiesGrid.innerHTML = `
+          <div class="no-results" style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+            <i class="fas fa-search" style="font-size: 3rem; color: var(--gray-400); margin-bottom: 1rem;"></i>
+            <p style="font-size: 1.2rem; color: var(--gray-600);">No se encontraron propiedades</p>
+            <p style="color: var(--gray-500); margin-top: 0.5rem;">Intenta ajustar tus filtros de búsqueda</p>
           </div>
-        </div>
-      </article>
-    `).join('');
-  }
+        `;
+      } else {
+        propertiesGrid.innerHTML = paginatedItems.map((property, index) => {
+          const safeTitle = escapeHtml(property.title || 'Sin título');
+          const safeLocation = escapeHtml(property.location || 'Ubicación no especificada');
+          const safeImage = property.image || './img/placeholder.jpg';
+          
+          return `
+            <article class="property-card animate-slide-up" style="animation-delay: ${index * 0.05}s" data-id="${property.id}" onclick="openPropertyDetail(${property.id})">
+              <div class="property-image-wrapper">
+                <img src="${safeImage}" alt="${safeTitle}" class="property-image" loading="lazy" onerror="this.src='./img/placeholder.jpg'">
+                <span class="property-badge badge-${property.status === 'inmediata' ? 'immediate' : property.status === 'construccion' ? 'construction' : 'plans'}">
+                  ${property.status === 'inmediata' ? 'Entrega Inmediata' : property.status === 'construccion' ? 'En Construcción' : 'Sobre Planos'}
+                </span>
+                <button class="property-favorite ${favorites.includes(property.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(event, ${property.id})" aria-label="Agregar a favoritos">
+                  <i class="${favorites.includes(property.id) ? 'fas' : 'far'} fa-heart"></i>
+                </button>
+              </div>
+              <div class="property-content">
+                <p class="property-price-label">Desde:</p>
+                <p class="property-price">${formatPrice(property.price || 0, property.priceType || 'venta')}</p>
+                <h3 class="property-title">${safeTitle}</h3>
+                <p class="property-location">
+                  <i class="fas fa-map-marker-alt"></i>
+                  ${safeLocation}
+                </p>
+                <div class="property-features">
+                  <span class="property-feature"><i class="fas fa-ruler-combined"></i> ${property.area || 0} m²</span>
+                  <span class="property-feature"><i class="fas fa-bed"></i> ${property.bedrooms || 0} Hab.</span>
+                  <span class="property-feature"><i class="fas fa-bath"></i> ${property.bathrooms || 0} Baños</span>
+                  <span class="property-feature"><i class="fas fa-car"></i> ${property.parking || 0} Parq.</span>
+                </div>
+              </div>
+            </article>
+          `;
+        }).join('');
+      }
+    }
 
-  // Render pagination
-  renderPagination(totalPages);
+    // Render pagination
+    renderPagination(totalPages);
+  } catch (error) {
+    console.error('Error rendering properties:', error);
+    showToast('Error al mostrar las propiedades', 'error');
+  }
+}
+
+// ===== UTILITY: ESCAPE HTML =====
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
 }
 
 // ===== RENDER PAGINATION =====
@@ -598,20 +693,36 @@ function formatPrice(price, type) {
 
 // ===== FAVORITES =====
 window.toggleFavorite = function(event, propertyId) {
-  event.stopPropagation();
-  
-  const index = favorites.indexOf(propertyId);
-  if (index > -1) {
-    favorites.splice(index, 1);
-    showToast('Propiedad removida de favoritos');
-  } else {
-    favorites.push(propertyId);
-    showToast('Propiedad agregada a favoritos');
+  try {
+    event.stopPropagation();
+    
+    if (!propertyId || isNaN(propertyId)) {
+      console.warn('Invalid property ID:', propertyId);
+      return;
+    }
+    
+    const index = favorites.indexOf(propertyId);
+    if (index > -1) {
+      favorites.splice(index, 1);
+      showToast('Propiedad removida de favoritos');
+    } else {
+      favorites.push(propertyId);
+      showToast('Propiedad agregada a favoritos');
+    }
+    
+    try {
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+    } catch (storageError) {
+      console.error('Error saving to localStorage:', storageError);
+      showToast('Error al guardar favoritos', 'error');
+    }
+    
+    updateFavoritesCount();
+    renderProperties();
+  } catch (error) {
+    console.error('Error toggling favorite:', error);
+    showToast('Error al actualizar favoritos', 'error');
   }
-  
-  localStorage.setItem('favorites', JSON.stringify(favorites));
-  updateFavoritesCount();
-  renderProperties();
 };
 
 function updateFavoritesCount() {
@@ -632,16 +743,43 @@ function updateFavoritesCount() {
 window.openInfoModal = function(type) {
   const modal = document.getElementById(`modal-${type}`);
   if (modal) {
-    modal.classList.add('active');
+    // Agregar clase active con un pequeño delay para la animación
+    setTimeout(() => {
+      modal.classList.add('active');
+    }, 10);
     document.body.style.overflow = 'hidden';
+    
+    // Agregar animación de entrada a los elementos
+    const cards = modal.querySelectorAll('.servicio-card');
+    cards.forEach((card, index) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      setTimeout(() => {
+        card.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }, 100 + (index * 100));
+    });
   }
 };
 
 window.closeInfoModal = function(type) {
   const modal = document.getElementById(`modal-${type}`);
   if (modal) {
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
+    // Animar salida de las tarjetas
+    const cards = modal.querySelectorAll('.servicio-card');
+    cards.forEach((card, index) => {
+      setTimeout(() => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(-20px)';
+      }, index * 50);
+    });
+    
+    // Cerrar modal después de la animación
+    setTimeout(() => {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }, 300);
   }
 };
 
@@ -649,8 +787,13 @@ window.closeInfoModal = function(type) {
 document.querySelectorAll('.modal-overlay').forEach(modal => {
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
+      const modalId = modal.id;
+      if (modalId === 'modal-servicios') {
+        closeInfoModal('servicios');
+      } else {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
     }
   });
 });
@@ -752,8 +895,13 @@ let currentGalleryIndex = 0;
 let currentGalleryTab = 'fotos';
 
 window.openPropertyDetail = function(propertyId) {
-  const property = propertiesData.find(p => p.id === propertyId);
-  if (!property) return;
+  try {
+    const property = propertiesData.find(p => p.id === propertyId);
+    if (!property) {
+      console.warn('Property not found:', propertyId);
+      showToast('Propiedad no encontrada', 'error');
+      return;
+    }
 
   // Complete missing data
   if (!property.images) {
@@ -812,7 +960,7 @@ window.openPropertyDetail = function(propertyId) {
   // Update WhatsApp link
   const whatsappEl = document.getElementById('detail-whatsapp');
   const message = encodeURIComponent(`Hola, me interesa la propiedad: ${property.title}`);
-  whatsappEl.href = `https://wa.me/18095557890?text=${message}`;
+    whatsappEl.href = `https://wa.me/1?text=${message}`;
 
   // Load gallery
   loadPropertyGallery(property);
@@ -829,10 +977,18 @@ window.openPropertyDetail = function(propertyId) {
   // Load expenses
   loadPropertyExpenses(property);
 
-  // Open modal
-  const modal = document.getElementById('property-detail-modal');
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
+    // Open modal
+    const modal = document.getElementById('property-detail-modal');
+    if (!modal) {
+      console.error('Property detail modal not found');
+      return;
+    }
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  } catch (error) {
+    console.error('Error opening property detail:', error);
+    showToast('Error al cargar los detalles de la propiedad', 'error');
+  }
 };
 
 window.closePropertyDetail = function() {
@@ -1039,9 +1195,28 @@ window.shareProperty = function(platform) {
 
 window.copyPropertyLink = function() {
   const url = window.location.href;
-  navigator.clipboard.writeText(url).then(() => {
-    showToast('Enlace copiado al portapapeles');
-  });
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(() => {
+      showToast('Enlace copiado al portapapeles', 'success');
+    }).catch(() => {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = url;
+      textArea.style.position = 'fixed';
+      textArea.style.opacity = '0';
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        showToast('Enlace copiado al portapapeles', 'success');
+      } catch (err) {
+        showToast('Error al copiar el enlace', 'error');
+      }
+      document.body.removeChild(textArea);
+    });
+  } else {
+    showToast('Tu navegador no soporta esta función', 'error');
+  }
 };
 
 // Initialize contact form
@@ -1216,10 +1391,293 @@ if (document.readyState === 'loading') {
   initializeContactForm();
 }
 
-const typeLabels = {
-  'apartamento': 'Apartamento',
-  'casa': 'Casa',
-  'villa': 'Villa',
-  'penthouse': 'Penthouse',
-  'terreno': 'Terreno'
+// ===== ANIMATIONS & SCROLL REVEAL =====
+function initializeAnimations() {
+  // Simple scroll reveal implementation
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('aos-animate');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Observe all elements with data-aos attribute
+  document.querySelectorAll('[data-aos]').forEach(el => {
+    observer.observe(el);
+  });
+}
+
+// ===== COUNTERS ANIMATION =====
+function initializeCounters() {
+  const counters = document.querySelectorAll('.stat-value, .stat-number');
+  
+  const animateCounter = (counter) => {
+    const target = parseInt(counter.getAttribute('data-target')) || parseInt(counter.textContent);
+    const duration = 2000;
+    const increment = target / (duration / 16);
+    let current = 0;
+
+    const updateCounter = () => {
+      current += increment;
+      if (current < target) {
+        counter.textContent = Math.floor(current);
+        requestAnimationFrame(updateCounter);
+      } else {
+        counter.textContent = target;
+      }
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          updateCounter();
+          observer.unobserve(counter);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    observer.observe(counter);
+  };
+
+  counters.forEach(counter => {
+    counter.textContent = '0';
+    animateCounter(counter);
+  });
+}
+
+// ===== TESTIMONIALS CAROUSEL =====
+let currentTestimonial = 0;
+const testimonials = document.querySelectorAll('.testimonial-card');
+const totalTestimonials = testimonials.length;
+
+function initializeTestimonials() {
+  if (testimonials.length === 0) return;
+  
+  // Set first testimonial as active
+  testimonials[0].classList.add('active');
+  
+  // Auto-rotate testimonials every 5 seconds
+  setInterval(() => {
+    if (totalTestimonials > 1) {
+      changeTestimonial(1);
+    }
+  }, 5000);
+}
+
+window.changeTestimonial = function(direction) {
+  testimonials[currentTestimonial].classList.remove('active');
+  
+  currentTestimonial += direction;
+  
+  if (currentTestimonial < 0) {
+    currentTestimonial = totalTestimonials - 1;
+  } else if (currentTestimonial >= totalTestimonials) {
+    currentTestimonial = 0;
+  }
+  
+  testimonials[currentTestimonial].classList.add('active');
+  updateTestimonialDots();
 };
+
+window.goToTestimonial = function(index) {
+  testimonials[currentTestimonial].classList.remove('active');
+  currentTestimonial = index;
+  testimonials[currentTestimonial].classList.add('active');
+  updateTestimonialDots();
+};
+
+function updateTestimonialDots() {
+  const dots = document.querySelectorAll('.testimonials-dots .dot');
+  dots.forEach((dot, index) => {
+    dot.classList.toggle('active', index === currentTestimonial);
+  });
+}
+
+// ===== MAP FUNCTIONALITY =====
+let propertiesMap = null;
+let mapMarkers = [];
+
+// Coordenadas aproximadas de República Dominicana por ubicación
+const locationCoordinates = {
+  'Punta Cana': [18.5819, -68.4047],
+  'Santo Domingo': [18.4861, -69.9312],
+  'La Esperilla': [18.4800, -69.9500],
+  'Jarabacoa': [19.1167, -70.6333],
+  'Santiago': [19.4517, -70.6970],
+  'La Romana': [18.4273, -68.9728],
+  'Las Terrenas': [19.3167, -69.5333],
+  'default': [18.7357, -70.1627] // Centro de República Dominicana
+};
+
+function getCoordinatesForLocation(location) {
+  if (!location) return locationCoordinates['default'];
+  
+  const locationLower = location.toLowerCase();
+  for (const [key, coords] of Object.entries(locationCoordinates)) {
+    if (locationLower.includes(key.toLowerCase())) {
+      return coords;
+    }
+  }
+  return locationCoordinates['default'];
+}
+
+window.openMapModal = function() {
+  const modal = document.getElementById('map-modal');
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Inicializar mapa si no existe
+    if (!propertiesMap) {
+      initializePropertiesMap();
+    } else {
+      // Actualizar marcadores si el mapa ya existe
+      updateMapMarkers();
+    }
+  }
+};
+
+window.closeMapModal = function() {
+  const modal = document.getElementById('map-modal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+};
+
+function initializePropertiesMap() {
+  const mapContainer = document.getElementById('properties-map');
+  if (!mapContainer) return;
+
+  // Inicializar mapa centrado en República Dominicana
+  propertiesMap = L.map('properties-map').setView([18.7357, -70.1627], 8);
+
+  // Agregar capa de tiles (OpenStreetMap)
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors',
+    maxZoom: 19
+  }).addTo(propertiesMap);
+
+  // Agregar marcadores
+  updateMapMarkers();
+}
+
+function updateMapMarkers() {
+  if (!propertiesMap) return;
+
+  // Limpiar marcadores existentes
+  mapMarkers.forEach(marker => marker.remove());
+  mapMarkers = [];
+
+  // Obtener propiedades filtradas
+  const filteredProperties = filterProperties();
+
+  // Agregar marcador para cada propiedad
+  filteredProperties.forEach(property => {
+    const coords = getCoordinatesForLocation(property.location);
+    
+    // Determinar color del marcador según el estado
+    let markerColor = '#0891b2'; // Color por defecto (primary)
+    if (property.status === 'inmediata') {
+      markerColor = '#22c55e'; // Verde (success)
+    } else if (property.status === 'construccion') {
+      markerColor = '#eab308'; // Amarillo (warning)
+    }
+
+    // Crear icono personalizado
+    const customIcon = L.divIcon({
+      className: 'custom-marker',
+      html: `<div style="
+        width: 30px;
+        height: 30px;
+        background: ${markerColor};
+        border: 3px solid white;
+        border-radius: 50%;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      ">
+        <i class="fas fa-home" style="color: white; font-size: 12px;"></i>
+      </div>`,
+      iconSize: [30, 30],
+      iconAnchor: [15, 15]
+    });
+
+    // Crear marcador
+    const marker = L.marker(coords, { icon: customIcon }).addTo(propertiesMap);
+
+    // Crear popup con información de la propiedad
+    const popupContent = `
+      <div style="min-width: 200px;">
+        <img src="${property.image || './img/placeholder.jpg'}" 
+             alt="${escapeHtml(property.title)}" 
+             style="width: 100%; height: 120px; object-fit: cover; border-radius: 0.5rem; margin-bottom: 0.75rem;">
+        <h4 style="font-weight: 700; color: var(--gray-900); margin-bottom: 0.5rem; font-size: 1rem;">
+          ${escapeHtml(property.title)}
+        </h4>
+        <p style="color: var(--primary); font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;">
+          ${formatPrice(property.price || 0, property.priceType || 'venta')}
+        </p>
+        <p style="color: var(--gray-600); font-size: 0.875rem; margin-bottom: 0.75rem;">
+          <i class="fas fa-map-marker-alt"></i> ${escapeHtml(property.location || 'Ubicación no especificada')}
+        </p>
+        <div style="display: flex; gap: 1rem; margin-bottom: 0.75rem; font-size: 0.875rem; color: var(--gray-600);">
+          <span><i class="fas fa-ruler-combined"></i> ${property.area || 0} m²</span>
+          <span><i class="fas fa-bed"></i> ${property.bedrooms || 0}</span>
+          <span><i class="fas fa-bath"></i> ${property.bathrooms || 0}</span>
+        </div>
+        <button onclick="closeMapModal(); openPropertyDetail(${property.id});" 
+                style="width: 100%; padding: 0.75rem; background: var(--primary); color: white; border: none; border-radius: 0.5rem; cursor: pointer; font-weight: 600; transition: all 0.3s;"
+                onmouseover="this.style.background='var(--primary-dark)'"
+                onmouseout="this.style.background='var(--primary)'">
+          Ver Detalles
+        </button>
+      </div>
+    `;
+
+    marker.bindPopup(popupContent, {
+      maxWidth: 250,
+      className: 'property-popup'
+    });
+
+    mapMarkers.push(marker);
+  });
+
+  // Ajustar vista para mostrar todos los marcadores
+  if (mapMarkers.length > 0) {
+    const group = new L.featureGroup(mapMarkers);
+    propertiesMap.fitBounds(group.getBounds().pad(0.1));
+  }
+}
+
+// Event listener para el botón del mapa (se ejecuta después de que el DOM esté listo)
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeMapButton);
+} else {
+  initializeMapButton();
+}
+
+function initializeMapButton() {
+  const mapBtn = document.querySelector('.btn-map');
+  if (mapBtn) {
+    mapBtn.addEventListener('click', openMapModal);
+  }
+
+  // Cerrar modal al hacer clic en el overlay
+  const mapModal = document.getElementById('map-modal');
+  if (mapModal) {
+    mapModal.addEventListener('click', (e) => {
+      if (e.target === mapModal) {
+        closeMapModal();
+      }
+    });
+  }
+}

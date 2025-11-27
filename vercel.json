@@ -1,0 +1,57 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "cleanUrls": false,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/proyecto-universitario/propiedades.html",
+      "destination": "/proyecto-universitario/propiedades.html"
+    },
+    {
+      "source": "/proyecto-universitario/index.html",
+      "destination": "/proyecto-universitario/index.html"
+    },
+    {
+      "source": "/proyecto-universitario/",
+      "destination": "/proyecto-universitario/index.html"
+    },
+    {
+      "source": "/proyecto-universitario",
+      "destination": "/proyecto-universitario/index.html"
+    },
+    {
+      "source": "/propiedades.html",
+      "destination": "/proyecto-universitario/propiedades.html"
+    },
+    {
+      "source": "/propiedades",
+      "destination": "/proyecto-universitario/propiedades.html"
+    },
+    {
+      "source": "/",
+      "destination": "/proyecto-universitario/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
+    }
+  ]
+}
+

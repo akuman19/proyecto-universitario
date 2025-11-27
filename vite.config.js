@@ -1,7 +1,8 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import { fileURLToPath } from 'url';
-import { writeFileSync } from 'fs';
+import { writeFileSync, copyFileSync, mkdirSync, existsSync, readdirSync, statSync } from 'fs';
+import { join } from 'path';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
@@ -20,6 +21,44 @@ const nojekyllPlugin = () => {
   };
 };
 
+// Plugin para copiar imágenes de src/img a dist/img
+const copyImagesPlugin = () => {
+  return {
+    name: 'copy-images',
+    closeBundle() {
+      try {
+        const srcImgDir = resolve(__dirname, 'src/img');
+        const distImgDir = resolve(__dirname, 'dist/img');
+        
+        if (!existsSync(srcImgDir)) {
+          console.warn('⚠ src/img directory does not exist');
+          return;
+        }
+
+        // Crear directorio dist/img si no existe
+        if (!existsSync(distImgDir)) {
+          mkdirSync(distImgDir, { recursive: true });
+        }
+
+        // Copiar todas las imágenes
+        const files = readdirSync(srcImgDir);
+        files.forEach(file => {
+          const srcPath = join(srcImgDir, file);
+          const distPath = join(distImgDir, file);
+          
+          if (statSync(srcPath).isFile()) {
+            copyFileSync(srcPath, distPath);
+          }
+        });
+
+        console.log('✓ Copied images from src/img to dist/img');
+      } catch (err) {
+        console.warn('⚠ Could not copy images:', err.message);
+      }
+    }
+  };
+};
+
 // Detectar si estamos en Netlify (sin base path) o GitHub Pages/Vercel (con base path)
 const isNetlify = process.env.NETLIFY === 'true' || process.env.CONTEXT === 'production';
 const base = isNetlify ? '/' : '/proyecto-universitario/';
@@ -27,7 +66,7 @@ const base = isNetlify ? '/' : '/proyecto-universitario/';
 export default defineConfig({
   base: base,
   root: 'src',
-  plugins: [nojekyllPlugin()],
+  plugins: [nojekyllPlugin(), copyImagesPlugin()],
   build: {
     outDir: '../dist',
     emptyOutDir: true,
@@ -48,6 +87,6 @@ export default defineConfig({
     port: 3000,
     open: true
   },
-  publicDir: '../public'
+  publicDir: false
 });
 

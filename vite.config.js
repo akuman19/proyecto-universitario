@@ -20,8 +20,12 @@ const nojekyllPlugin = () => {
   };
 };
 
+// Detectar si estamos en Netlify (sin base path) o GitHub Pages/Vercel (con base path)
+const isNetlify = process.env.NETLIFY === 'true' || process.env.CONTEXT === 'production';
+const base = isNetlify ? '/' : '/proyecto-universitario/';
+
 export default defineConfig({
-  base: '/proyecto-universitario/',
+  base: base,
   root: 'src',
   plugins: [nojekyllPlugin()],
   build: {

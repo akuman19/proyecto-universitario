@@ -3,6 +3,11 @@
   publish = "dist"
 
 [[redirects]]
+  from = "/proyecto-universitario/assets/*"
+  to = "/proyecto-universitario/assets/:splat"
+  status = 200
+
+[[redirects]]
   from = "/proyecto-universitario/*"
   to = "/proyecto-universitario/:splat"
   status = 200

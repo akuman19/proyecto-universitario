@@ -40,14 +40,18 @@ const copyImagesPlugin = () => {
           mkdirSync(distImgDir, { recursive: true });
         }
 
-        // Copiar todas las imágenes
+        // Copiar todas las imágenes (manejar nombres con caracteres especiales)
         const files = readdirSync(srcImgDir);
         files.forEach(file => {
-          const srcPath = join(srcImgDir, file);
-          const distPath = join(distImgDir, file);
-          
-          if (statSync(srcPath).isFile()) {
-            copyFileSync(srcPath, distPath);
+          try {
+            const srcPath = join(srcImgDir, file);
+            const distPath = join(distImgDir, file);
+            
+            if (statSync(srcPath).isFile()) {
+              copyFileSync(srcPath, distPath);
+            }
+          } catch (err) {
+            console.warn(`⚠ Could not copy image ${file}:`, err.message);
           }
         });
 

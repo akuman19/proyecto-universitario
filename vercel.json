@@ -36,6 +36,46 @@
   ],
   "headers": [
     {
+      "source": "/proyecto-universitario/assets/(.*\\.css)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/css; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "source": "/proyecto-universitario/assets/(.*\\.js)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/javascript; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "source": "/proyecto-universitario/img/(.*\\.(jpg|jpeg|png|gif|webp))",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "image/jpeg"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/proyecto-universitario/img/(.*\\.jpeg)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "image/jpeg"
+        }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         {
